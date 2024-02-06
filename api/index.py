@@ -86,6 +86,10 @@ def index():
     # return render_template('test/index.html')
     return "Welcome to the Machakos University IR API!"
 
+@app.route('/x', methods=['GET'])
+def x():
+    return render_template('main.html')
+
 def save_doc(file):
     upload_path = f'uploads/{file.filename}'
     
