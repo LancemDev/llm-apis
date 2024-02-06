@@ -79,7 +79,7 @@ def test():
 
 @app.route('/test-uploads')
 def test_uploads():
-    return render_template('home/index.html')
+    return render_template('/home/index.html')
 
 @app.route('/')
 def index():
