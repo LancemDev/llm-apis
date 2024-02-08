@@ -219,8 +219,7 @@
 
     // print all selected files
     document.getElementById("submit").onclick = async () => {
-        alert('Submitted Files:\n${JSON.stringify(FILES)}')
-        // alert(`Submitted Files:\n${JSON.stringify(FILES)}`);
+        alert(`Submitted Files:\n${JSON.stringify(FILES)}`);
         let formData = new FormData();
 
         for (const [url, file] of Object.entries(FILES)) {
