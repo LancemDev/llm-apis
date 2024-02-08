@@ -85,6 +85,8 @@ def submit_document(file):
         print(f"Type: {form_data['dc_type']}")
         # print(f"License: {form_data['dv_license']}")
         print(f"Decision: {form_data['decision']}")
+        print(f"Description: {form_data['description']}")
+        print(f"File: {file.filename}")
         print(f"Document '{file.filename}' submitted successfully!")
     else:
         print(f"Failed to submit document '{file.filename}'. Status code: {response.status_code}")
