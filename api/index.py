@@ -19,15 +19,15 @@ input_names = {
 }
 
 # Constants for different categories
-agriculture = 189
-business = 217
-education = 218
-engineering = 219
-environment = 221
-health_sciences = 220
-hospitality = 216
-humanities = 188
-pure_sciences = 215
+agriculture = "189/"
+business = "217/"
+education = "218/"
+engineering = "219/"
+environment = "221/"
+health_sciences = "220/"
+hospitality = "216/"
+humanities = "188/"
+pure_sciences = "215/"
 
 # Example URL for engineering category
 full_url_example = base_url + str(engineering)
@@ -41,7 +41,7 @@ headers = {
     'Accept': "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
     "Accept-Language": "en-US,en;q=0.9",
     "Origin": "https://ir.mksu.ac.ke",
-    "Referer": "http://ir.mksu.ac.ke/handle/123456780/219",
+    "Referer": "http://ir.mksu.ac.ke/handle/123456780/219/",
     "Upgrade-Insecure-Requests": "1",
 }
 
@@ -73,7 +73,7 @@ def submit_document(file):
 
     # Submit the form
     try:
-        response = session.post(full_url_example + '/submit', data=form_data, headers=headers, timeout=10)
+        response = session.post(full_url_example + 'submit', data=form_data, headers=headers, timeout=10)
     except requests.exceptions.Timeout:
         print(f"Timeout occurred while submitting document '{file.filename}'")
         return None
