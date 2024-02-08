@@ -156,9 +156,9 @@ def submit_documents():
 
         # Save each file
         # Let's remove the saving part. It's not as important
-        print(f"Saving file {file.filename}...")
-        save_doc(file)
-        print(f"File {file.filename} saved.")
+        # print(f"Saving file {file.filename}...")
+        # save_doc(file)
+        # print(f"File {file.filename} saved.")
 
         # Then submit the document
         print(f"Submitting file {file.filename}...")
