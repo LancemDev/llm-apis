@@ -219,7 +219,7 @@
 
     // print all selected files
     document.getElementById("submit").onclick = async () => {
-        alert(`Submitted Files:\n${JSON.stringify(FILES)}`);
+        alert(`Submitted Files:\n${Object.values(FILES).map(file => file.name).join('\n')}`);
         let formData = new FormData();
 
         for (const [url, file] of Object.entries(FILES)) {
@@ -240,12 +240,12 @@
 
     // clear entire selection
     document.getElementById("cancel").onclick = () => {
-    while (gallery.children.length > 0) {
-    gallery.lastChild.remove();
-    }
-    FILES = {};
-    empty.classList.remove("hidden");
-    gallery.append(empty);
+        while (gallery.children.length > 0) {
+            gallery.lastChild.remove();
+        }
+        FILES = {};
+        empty.classList.remove("hidden");
+        gallery.append(empty);
     };
 
     </script>
