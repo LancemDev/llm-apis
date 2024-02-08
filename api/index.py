@@ -1,4 +1,5 @@
 import requests
+import os
 from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
@@ -91,10 +92,14 @@ def x():
     return render_template('main.html')
 
 def save_doc(file):
-    upload_path = f'uploads/{file.filename}'
+    upload_dir = 'uploads'
+    upload_path = os.path.join(upload_dir, file.filename)
     
-    if(file.save(upload_path)):
-        return file.filename + " saved successfully"
+    # Create the directory if it doesn't exist
+    os.makedirs(upload_dir, exist_ok=True)
+    
+    file.save(upload_path)
+    print(f"File {file.filename} saved successfully.")
 
 
     
