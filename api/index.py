@@ -132,7 +132,10 @@ def save_doc(file):
     upload_path = upload_dir / file.filename
     
     # Create the directory if it doesn't exist
-    upload_dir.mkdir(parents=True, exist_ok=True)
+    try:
+        upload_dir.mkdir(parents=True)
+    except FileExistsError:
+        pass
     
     file.save(upload_path)
     print(f"File {file.filename} saved successfully.")
