@@ -74,6 +74,15 @@ def submit_document(file):
 
     # Check if the submission was successful
     if response.status_code == 200:
+        # print out the values submitted
+        print(f"Title: {form_data['dc_title']}")
+        print(f"Author: {form_data['dv_contributor_author_last']}")
+        print(f"Year: {form_data['dc_date_issued_year']}")
+        print(f"Month: {form_data['dc_date_issued_month']}")
+        print(f"Publisher: {form_data['dv_publisher']}")
+        print(f"Type: {form_data['dc_type']}")
+        print(f"License: {form_data['dv_license']}")
+        print(f"Decision: {form_data['decision']}")
         print(f"Document '{file.filename}' submitted successfully!")
     else:
         print(f"Failed to submit document '{file.filename}'. Status code: {response.status_code}")
