@@ -70,7 +70,7 @@ def submit_document(file):
     form_data['dc_title'] = file.filename.split('.')[0]
 
     # Submit the form
-    response = session.post(full_url_example + 'submit', data=form_data, headers=headers)
+    response = session.post(full_url_example + '/submit', data=form_data, headers=headers)
 
     # Check if the submission was successful
     if response.status_code == 200:
