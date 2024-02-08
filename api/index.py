@@ -104,12 +104,20 @@ def submit_documents():
     uploaded_files = request.files.getlist('documents')
 
     # Process the uploaded files as needed
-    for file in uploaded_files:
-        # Save each file
-        save_doc(file)
-        # then submit the document
-        submit_document(file)
+    for i, file in enumerate(uploaded_files, start=1):
+        print(f"Processing file {i} of {len(uploaded_files)}: {file.filename}")
 
+        # Save each file
+        print(f"Saving file {file.filename}...")
+        save_doc(file)
+        print(f"File {file.filename} saved.")
+
+        # then submit the document
+        print(f"Submitting file {file.filename}...")
+        submit_document(file)
+        print(f"File {file.filename} submitted.")
+
+    print("All files processed successfully.")
     return 'Files saved successfully'
 
 @app.route('/login', methods=['GET'])
