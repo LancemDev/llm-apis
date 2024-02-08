@@ -5,7 +5,7 @@ from flask import Flask, render_template, request, jsonify
 app = Flask(__name__)
 
 # Base URL for the website
-base_url = 'ir.mksu.ac.ke/handle/123456780/'
+base_url = 'https://ir.mksu.ac.ke/handle/123456780/'
 
 # Sample input names for the form fields
 input_names = {
