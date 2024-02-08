@@ -169,9 +169,9 @@ def submit_documents():
             print(f"Processing file {i} of {len(uploaded_files)}: {file.filename}")
 
             # Save each file
-            print(f"Saving file {file.filename}...")
-            save_doc(file)
-            print(f"File {file.filename} saved.")
+            # print(f"Saving file {file.filename}...")
+            # save_doc(file)
+            # print(f"File {file.filename} saved.")
 
             # Then submit the document
             print(f"Submitting file {file.filename}...")
