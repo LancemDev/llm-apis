@@ -41,7 +41,7 @@ headers = {
     'Accept': "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
     "Accept-Language": "en-US,en;q=0.9",
     "Origin": "https://ir.mksu.ac.ke",
-    "Referer": "https://ir.mksu.ac.ke/handle/123456780/219",
+    "Referer": "http://ir.mksu.ac.ke/handle/123456780/219",
     "Upgrade-Insecure-Requests": "1",
 }
 
@@ -153,9 +153,9 @@ def submit_documents():
 
         # Save each file
         # Let's remove the saving part. It's not as important
-        # print(f"Saving file {file.filename}...")
-        # save_doc(file)
-        # print(f"File {file.filename} saved.")
+        print(f"Saving file {file.filename}...")
+        save_doc(file)
+        print(f"File {file.filename} saved.")
 
         # Then submit the document
         print(f"Submitting file {file.filename}...")
@@ -191,7 +191,7 @@ def login_post():
     password_input_name = "login_password"
     email_input_name = "login_email"
 
-    login_url = "ir.mksu.ac.ke/password-login"
+    login_url = base_url + "password-login"
 
     login_data = {
         email_input_name: email,
@@ -202,6 +202,7 @@ def login_post():
     if not response.ok:
         return "Login failed.....\nEmail: " + email + "\nPassword: " + password
     # Redirect to /test-uploads
+    headers['Cookie'] = f'JSESSIONID={response.cookies["JSESSIONID"]}'
     return "Login successful!.....\nEmail: " + email + "\nPassword: " + password
     
 
