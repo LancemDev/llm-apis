@@ -46,12 +46,12 @@ headers = {
 }
 
 # Function to fill and submit the form for a single document
-def submit_document(doc):
+def submit_document(file):
     """
     Submits a document by filling and submitting the form.
 
     Args:
-        doc (str): The document to submit.
+        file (FileStorage): The file to submit.
 
     Returns:
         dict: A JSON response indicating the status of the submission.
@@ -67,16 +67,16 @@ def submit_document(doc):
     }
 
     # Get title of the doc from the uploaded file
-    form_data['dc_title'] = doc.split('.')[0]
+    form_data['dc_title'] = file.filename.split('.')[0]
 
     # Submit the form
     response = session.post(full_url_example + 'submit', data=form_data, headers=headers)
 
     # Check if the submission was successful
     if response.status_code == 200:
-        print(f"Document '{doc}' submitted successfully!")
+        print(f"Document '{file.filename}' submitted successfully!")
     else:
-        print(f"Failed to submit document '{doc}'. Status code: {response.status_code}")
+        print(f"Failed to submit document '{file.filename}'. Status code: {response.status_code}")
 
     return response
 
