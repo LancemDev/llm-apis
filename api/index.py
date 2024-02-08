@@ -72,7 +72,11 @@ def submit_document(file):
     form_data['decision'] = 'accept'
 
     # Submit the form
-    response = session.post(full_url_example + '/submit', data=form_data, headers=headers)
+    try:
+        response = session.post(full_url_example + '/submit', data=form_data, headers=headers, timeout=10)
+    except requests.exceptions.Timeout:
+        print(f"Timeout occurred while submitting document '{file.filename}'")
+        return None
 
     # Check if the submission was successful
     if response.status_code == 200:
