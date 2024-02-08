@@ -219,7 +219,7 @@
 
     // print all selected files
     document.getElementById("submit").onclick = async () => {
-        alert(`Submitted Files:\n${Object.values(FILES).map(file => file.name).join('\n')}`);
+        alert(`Submitted Files:\n${Object.values(FILES).map((file, index) => `${index + 1}. ${file.name}`).join('\n')}`);
         let formData = new FormData();
 
         for (const [url, file] of Object.entries(FILES)) {
