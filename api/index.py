@@ -63,11 +63,13 @@ def submit_document(file):
         'dc_date_issued_month': 'December',  # Assuming the date format is YYYY-MM
         'dv_publisher': 'Machakos University Press',
         'dc_type': 'Learning Object',
-        'decision': 'on',
     }
 
     # Get title of the doc from the uploaded file
     form_data['dc_title'] = file.filename.split('.')[0]
+    form_data['file'] = (file.filename, file.read())
+    form_data['description'] = 'Past Examinstion Paper'
+    form_data['decision'] = 'accept'
 
     # Submit the form
     response = session.post(full_url_example + '/submit', data=form_data, headers=headers)
@@ -81,7 +83,7 @@ def submit_document(file):
         print(f"Month: {form_data['dc_date_issued_month']}")
         print(f"Publisher: {form_data['dv_publisher']}")
         print(f"Type: {form_data['dc_type']}")
-        print(f"License: {form_data['dv_license']}")
+        # print(f"License: {form_data['dv_license']}")
         print(f"Decision: {form_data['decision']}")
         print(f"Document '{file.filename}' submitted successfully!")
     else:
