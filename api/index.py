@@ -165,21 +165,23 @@ def submit_documents():
 
     # Process the uploaded files as needed
     for i, file in enumerate(uploaded_files, start=1):
-        print(f"Processing file {i} of {len(uploaded_files)}: {file.filename}")
+        try:
+            print(f"Processing file {i} of {len(uploaded_files)}: {file.filename}")
 
-        # Save each file
-        # Let's remove the saving part. It's not as important
-        # print(f"Saving file {file.filename}...")
-        # save_doc(file)
-        # print(f"File {file.filename} saved.")
+            # Save each file
+            print(f"Saving file {file.filename}...")
+            save_doc(file)
+            print(f"File {file.filename} saved.")
 
-        # Then submit the document
-        print(f"Submitting file {file.filename}...")
-        submit_document(file)
-        print(f"File {file.filename} submitted.")
+            # Then submit the document
+            print(f"Submitting file {file.filename}...")
+            submit_document(file)
+            print(f"File {file.filename} submitted.")
+        except Exception as e:
+            print(f"Error processing file {file.filename}: {e}")
 
-    print("All files processed successfully.")
-    return 'Files saved successfully'
+    print("All files processed.")
+    return 'Files processed'
 
 @app.route('/login', methods=['GET'])
 def login_get():
