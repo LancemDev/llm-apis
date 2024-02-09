@@ -2,21 +2,12 @@ import requests
 from pathlib import Path
 from flask import Flask, render_template, request, jsonify
 
+# Create the Flask app
+
 app = Flask(__name__)
 
 # Base URL for the website
 base_url = 'http://ir.mksu.ac.ke/handle/123456780/'
-
-# Sample input names for the form fields
-input_names = {
-    'title': 'dc_title',
-    'author': 'dv_contributor_author_last',
-    'year': 'dc_date_issued',
-    'month': 'dc_date_issued',
-    'publisher': 'dv_publisher',
-    'type': 'dc_type',
-    'license': 'dv_license',
-}
 
 # Constants for different categories
 agriculture = "189/"
@@ -30,7 +21,7 @@ humanities = "188/"
 pure_sciences = "215/"
 
 # Example URL for engineering category
-full_url_example = base_url + str(engineering)
+full_url_example = base_url + engineering
 
 # Headers for HTTP requests
 headers = {
@@ -63,13 +54,14 @@ def submit_document(file):
         'dc_date_issued_month': 'December',  # Assuming the date format is YYYY-MM
         'dv_publisher': 'Machakos University Press',
         'dc_type': 'Learning Object',
+        'description': 'Past Examination Paper',
+        'decision': 'accept',
+        'dc_langauge': 'en', 
     }
 
     # Get title of the doc from the uploaded file
     form_data['dc_title'] = file.filename.split('.')[0]
     form_data['file'] = (file.filename, file.read())
-    form_data['description'] = 'Past Examinstion Paper'
-    form_data['decision'] = 'accept'
 
     # Submit the form
     try:
