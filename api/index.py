@@ -218,6 +218,28 @@ def login_post():
     # Redirect to /test-uploads
     headers['Cookie'] = f'JSESSIONID={response.cookies["JSESSIONID"]}'
     return "Login successful!.....\nEmail: " + email + "\nPassword: " + password
+
+@app.route('/fetch_html')
+def fetch_html():
+    """
+    Fetches all the HTML from the base URL.
+
+    Returns:
+        str: The HTML of the base URL.
+    """
+    try:
+        response = requests.get(base_url, headers=headers)
+        response.raise_for_status()  # Raises a HTTPError if the status is 4xx, 5xx
+    except requests.exceptions.HTTPError as errh:
+        return f"HTTP Error: {errh}"
+    except requests.exceptions.ConnectionError as errc:
+        return f"Error Connecting: {errc}"
+    except requests.exceptions.Timeout as errt:
+        return f"Timeout Error: {errt}"
+    except requests.exceptions.RequestException as err:
+        return f"Something went wrong: {err}"
+
+    return response.text
     
 
 if __name__ == "__main__":

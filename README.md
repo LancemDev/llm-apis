@@ -1,28 +1,60 @@
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fexamples%2Ftree%2Fmain%2Fpython%2Fflask3&demo-title=Flask%203%20%2B%20Vercel&demo-description=Use%20Flask%203%20on%20Vercel%20with%20Serverless%20Functions%20using%20the%20Python%20Runtime.&demo-url=https%3A%2F%2Fflask3-python-template.vercel.app%2F&demo-image=https://assets.vercel.com/image/upload/v1669994156/random/flask.png)
+## Examflow
+This is a Python-based web application that automates some data entry to an intranet Koha library management system. The application is built using the Flask framework and is hosted on Vercel at ir-mksu.vercel.app.
 
-# Flask + Vercel
+Project Structure
+The project has the following structure:
 
-This example shows how to use Flask 3 on Vercel with Serverless Functions using the [Python Runtime](https://vercel.com/docs/concepts/functions/serverless-functions/runtimes/python).
+.gitignore
+.vscode/
+api/
+    index.py
+    templates/
+        home/
+            index.html
+            login.html
+        test/
+            index.html
+README.md
+requirements.txt
+static/
+    css/
+        input.css
+        output.css
+templates/
+    main.html
+uploads/
+venv/
+vercel.json
 
-## Demo
 
-https://flask-python-template.vercel.app/
+Getting Started
+To get a local copy up and running, follow these steps:
 
-## How it Works
+Clone the repository to your local machine.
+Navigate to the project directory.
+Create a virtual environment and activate it.
+Install the required packages using pip:
 
-This example uses the Web Server Gateway Interface (WSGI) with Flask to enable handling requests on Vercel with Serverless Functions.
+pip install -r requirements.txt
 
-## Running Locally
+Run the application:
 
-```bash
-npm i -g vercel
-vercel dev
-```
+python api/index.py
 
-Your Flask application is now available at `http://localhost:3000`.
+Usage
+Navigate to the home page to start using the application. You can log in, view tests, and interact with the application's features.
 
-## One-Click Deploy
+Contributing
+Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are greatly appreciated.
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=vercel-examples):
+License
+Distributed under the MIT License. See LICENSE for more information.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fexamples%2Ftree%2Fmain%2Fpython%2Fflask3&demo-title=Flask%203%20%2B%20Vercel&demo-description=Use%20Flask%203%20on%20Vercel%20with%20Serverless%20Functions%20using%20the%20Python%20Runtime.&demo-url=https%3A%2F%2Fflask3-python-template.vercel.app%2F&demo-image=https://assets.vercel.com/image/upload/v1669994156/random/flask.png)
+Contact
+Your Name - your@email.com
+
+Project Link: https://github.com/LancemDev/mksu-examflow
+
+Acknowledgments
+Best-README-Template
+Please replace placeholders like "Your Name", "your@email.com", and "https://github.com/your_username/repo_name" with your actual information.
