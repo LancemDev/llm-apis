@@ -230,7 +230,7 @@ def fetch_html():
     try:
         # Fetch cookies
         headers['Cookie'] = f'JSESSIONID={session.cookies["JSESSIONID"]}'
-        response = requests.get(base_url, headers=headers)
+        response = requests.get(full_url_example, headers=headers)
         response.raise_for_status()  # Raises a HTTPError if the status is 4xx, 5xx
     except requests.exceptions.HTTPError as errh:
         return f"HTTP Error: {errh}"
