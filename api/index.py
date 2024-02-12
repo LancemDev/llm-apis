@@ -24,20 +24,18 @@ pure_sciences = "215/"
 full_url_example = base_url + engineering
 
 # Headers for HTTP requests
-# Headers for HTTP requests
 headers = {
-    'Content-Type': 'application/x-www-form-urlencoded',
-    'Cookie': 'JSESSIONID=1D8E43C16A80AAF0F80AC401E24CF43B',
+    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,/;q=0.8,application/signed-exchange;v=b3;q=0.7',
+    'Accept-Encoding': 'gzip, deflate',
+    'Accept-Language': 'en-US,en;q=0.9',
+    'Connection': 'keep-alive',
+    'Cookie': 'amp_6e403e=y7amtQ0LsgPgK8SnXM3eGG...1hearcqsl.1hearcqsl.0.0.0; _ga=GA1.1.100642076.1700651316; _ga_NF2FGF1NDQ=GS1.1.1700651315.1.1.1700651468.60.0.0; JSESSIONID=1D8E43C16A80AAF0F80AC401E24CF43B',
     'Host': 'ir.mksu.ac.ke',
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36',
-    'Accept': "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
-    "Accept-Language": "en-US,en;q=0.9",
-    "Origin": "https://ir.mksu.ac.ke",
-    "Referer": "http://ir.mksu.ac.ke/handle/123456780/219/",
-    "Upgrade-Insecure-Requests": "1",
+    'Referer': 'http://ir.mksu.ac.ke/handle/123456780/187',
+    'Upgrade-Insecure-Requests': '1',
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36',
 }
 
-# Function to fill and submit the form for a single document
 def submit_document(file):
     """
     Submits a document by filling and submitting the form.
@@ -64,9 +62,19 @@ def submit_document(file):
     form_data['dc_title'] = file.filename.split('.')[0]
     form_data['file'] = (file.filename, file.read())
 
+    # URL to submit the form
+    target_url = 'http://ir.mksu.ac.ke/handle/123456780/219/submit'
+    login_url = 'http://ir.mksu.ac.ke/password-login'
+    credentials = {
+        'email': 'titutoo@mksu.ac.ke',
+        'password': 'Kimarutitoy',
+    }
+
     # Submit the form
     try:
-        response = session.post(full_url_example + 'submit', data=form_data, headers=headers, timeout=10)
+        with requests.Session() as session:
+            post = session.post(login_url, data=credentials, headers=headers)
+            response = session.post(target_url, files=form_data, headers=headers)
     except requests.exceptions.Timeout:
         print(f"Timeout occurred while submitting document '{file.filename}'")
         return None
@@ -80,7 +88,6 @@ def submit_document(file):
         print(f"Month: {form_data['dc_date_issued_month']}")
         print(f"Publisher: {form_data['dv_publisher']}")
         print(f"Type: {form_data['dc_type']}")
-        # print(f"License: {form_data['dv_license']}")
         print(f"Decision: {form_data['decision']}")
         print(f"Description: {form_data['description']}")
         print(f"File: {file.filename}")
@@ -88,10 +95,7 @@ def submit_document(file):
     else:
         print(f"Failed to submit document '{file.filename}'. Status code: {response.status_code}")
 
-    return response
-
-# Route for testing
-@app.route('/test')
+    return response@app.route('/test')
 def test():
     """
     A test route to check if the URLs are working.
@@ -220,29 +224,6 @@ def login_post():
     headers['Cookie'] = f'JSESSIONID={response.cookies["JSESSIONID"]}'
     return "Login successful!.....\nEmail: " + email + "\nPassword: " + password
 
-@app.route('/fetch_html')
-def fetch_html():
-    """
-    Fetches all the HTML from the base URL.
-
-    Returns:
-        str: The HTML of the base URL.
-    """
-    try:
-        # Fetch cookies
-        headers['Cookie'] = f'JSESSIONID={session.cookies["JSESSIONID"]}'
-        response = requests.get(full_url_example)
-        response.raise_for_status()  # Raises a HTTPError if the status is 4xx, 5xx
-    except requests.exceptions.HTTPError as errh:
-        return f"HTTP Error: {errh}"
-    except requests.exceptions.ConnectionError as errc:
-        return f"Error Connecting: {errc}"
-    except requests.exceptions.Timeout as errt:
-        return f"Timeout Error: {errt}"
-    except requests.exceptions.RequestException as err:
-        return f"Something went wrong: {err}"
-
-    return response.text
 
 @app.route('/fetch-sth')
 def fetch_sth():
