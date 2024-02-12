@@ -252,7 +252,7 @@ def fetch_sth():
     Returns:
         str: The response from the base URL.
     """
-    response = session.get('http://ir.mksu.ac.ke/handle/123456780/221')
+    response = session.get('http://ir.mksu.ac.ke/handle/123456780/221/submit')
     return response.text    
 
 if __name__ == "__main__":
