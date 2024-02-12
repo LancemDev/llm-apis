@@ -255,8 +255,8 @@ def fetch_sth():
     login_url = 'http://ir.mksu.ac.ke/password-login'
     target_url = 'http://ir.mksu.ac.ke/handle/123456780/221/submit'
     credentials = {
-        'email': 'titutoo@mksu.ac.ke',
-        'password': 'Kimarutitoy',
+        'login_email': 'titutoo@mksu.ac.ke',
+        'login_password': 'Kimarutitoy',
     }
 
     headers = {
@@ -272,7 +272,7 @@ def fetch_sth():
     }
 
     with requests.Session() as session:
-        post = session.post(login_url, data=credentials, headers=headers)
+        post = session.post(login_url, data=credentials)
         response = session.get(target_url, headers=headers)
 
     return response.text
