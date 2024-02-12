@@ -24,9 +24,10 @@ pure_sciences = "215/"
 full_url_example = base_url + engineering
 
 # Headers for HTTP requests
+# Headers for HTTP requests
 headers = {
     'Content-Type': 'application/x-www-form-urlencoded',
-    'Cookie': 'JSESSIONID=3A2F3B4E3B0F9A',
+    'Cookie': 'JSESSIONID=1D8E43C16A80AAF0F80AC401E24CF43B',
     'Host': 'ir.mksu.ac.ke',
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36',
     'Accept': "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
