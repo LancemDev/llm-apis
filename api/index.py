@@ -7,7 +7,7 @@ from flask import Flask, render_template, request, jsonify
 app = Flask(__name__)
 
 # Base URL for the website
-base_url = 'ir.mksu.ac.ke/handle/123456780/'
+base_url = 'http://ir.mksu.ac.ke/handle/123456780/'
 
 # Constants for different categories
 agriculture = "189/"
@@ -228,6 +228,8 @@ def fetch_html():
         str: The HTML of the base URL.
     """
     try:
+        # Fetch cookies
+        headers['Cookie'] = f'JSESSIONID={session.cookies["JSESSIONID"]}'
         response = requests.get(base_url, headers=headers)
         response.raise_for_status()  # Raises a HTTPError if the status is 4xx, 5xx
     except requests.exceptions.HTTPError as errh:
