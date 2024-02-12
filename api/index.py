@@ -74,7 +74,8 @@ def submit_document(file):
     try:
         with requests.Session() as session:
             post = session.post(login_url, data=credentials, headers=headers)
-            response = session.post(target_url, files=form_data, headers=headers)
+            # response = session.post(target_url, files=form_data, headers=headers)
+            response = session.get(target_url, headers=headers)
     except requests.exceptions.Timeout:
         print(f"Timeout occurred while submitting document '{file.filename}'")
         return None
@@ -124,16 +125,6 @@ def index():
         str: A welcome message.
     """
     return "Welcome to the Machakos University IR API!"
-
-@app.route('/x', methods=['GET'])
-def x():
-    """
-    A route for testing.
-
-    Returns:
-        str: The rendered template for the main page.
-    """
-    return render_template('main.html')
 
 def save_doc(file):
     """
