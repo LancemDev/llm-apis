@@ -243,7 +243,17 @@ def fetch_html():
         return f"Something went wrong: {err}"
 
     return response.text
-    
+
+@app.route('/fetch-sth')
+def fetch_sth():
+    """
+    Fetches something from the base URL.
+
+    Returns:
+        str: The response from the base URL.
+    """
+    response = session.get('http://ir.mksu.ac.ke')
+    return response.text    
 
 if __name__ == "__main__":
     app.run(debug=True)
