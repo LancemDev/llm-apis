@@ -213,7 +213,7 @@ def login_post():
         password_input_name: password
     }
 
-    response = session.post(login_url, data=login_data, headers=headers)
+    response = session.post(login_url, data=login_data)
     if not response.ok:
         return "Login failed.....\nEmail: " + email + "\nPassword: " + password
     # Redirect to /test-uploads
@@ -231,7 +231,7 @@ def fetch_html():
     try:
         # Fetch cookies
         headers['Cookie'] = f'JSESSIONID={session.cookies["JSESSIONID"]}'
-        response = requests.get(full_url_example, headers=headers)
+        response = requests.get(full_url_example)
         response.raise_for_status()  # Raises a HTTPError if the status is 4xx, 5xx
     except requests.exceptions.HTTPError as errh:
         return f"HTTP Error: {errh}"
@@ -252,7 +252,7 @@ def fetch_sth():
     Returns:
         str: The response from the base URL.
     """
-    response = session.get('http://ir.mksu.ac.ke')
+    response = session.get('http://ir.mksu.ac.ke/handle/123456780/221')
     return response.text    
 
 if __name__ == "__main__":
