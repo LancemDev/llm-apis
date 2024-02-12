@@ -74,8 +74,8 @@ def submit_document(file):
     try:
         with requests.Session() as session:
             post = session.post(login_url, data=credentials, headers=headers)
-            # response = session.post(target_url, files=form_data, headers=headers)
-            response = session.get(target_url, headers=headers)
+            response = session.post(target_url, data=form_data, headers=headers)
+            # response = session.get(target_url, headers=headers)
     except requests.exceptions.Timeout:
         print(f"Timeout occurred while submitting document '{file.filename}'")
         return None
