@@ -7,7 +7,7 @@ from flask import Flask, render_template, request, jsonify
 app = Flask(__name__)
 
 # Base URL for the website
-base_url = 'http://ir.mksu.ac.ke/handle/123456780/'
+base_url = 'ir.mksu.ac.ke/handle/123456780/'
 
 # Constants for different categories
 agriculture = "189/"
