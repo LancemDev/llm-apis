@@ -272,7 +272,7 @@ def fetch_sth():
     }
 
     with requests.Session() as session:
-        post = session.post(login_url, data=credentials)
+        post = session.post(login_url, data=credentials, headers=headers)
         response = session.get(target_url, headers=headers)
 
     return response.text
