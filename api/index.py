@@ -54,7 +54,7 @@ def submit_document(file):
         'dv_publisher': 'Machakos University Press',
         'dc_type': 'Learning Object',
         'description': 'Past Examination Paper',
-        'decision': 'accept',
+        'decision': 'on',
         'dc_langauge': 'en', 
     }
 
