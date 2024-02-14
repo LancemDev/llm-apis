@@ -1,7 +1,4 @@
-import requests
 from selenium import webdriver
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
@@ -96,6 +93,8 @@ def submit_document(file):
         # Close the browser
         driver.quit()
 
+    return response
+
 @app.route('/test')
 def test():
     """
@@ -174,6 +173,47 @@ def submit_documents():
 
     print("All files processed.")
     return 'Files processed'
+
+@app.route('/login', methods=['GET'])
+def login_get():
+    """
+    A route to display the login page.
+
+    Returns:
+        str: The rendered template for the login page.
+    """
+    return render_template('home/login.html')
+
+session = requests.Session()
+
+@app.route('/login', methods=['POST'])
+def login_post():
+    """
+    Handles the login form submission.
+
+    Returns:
+        str: A message indicating the status of the login.
+    """
+    email = request.form.get('email')
+    password = request.form.get('password')
+
+    password_input_name = "login_password"
+    email_input_name = "login_email"
+
+    login_url = base_url + "password-login"
+
+    login_data = {
+        email_input_name: email,
+        password_input_name: password
+    }
+
+    response = session.post(login_url, data=login_data)
+    if not response.ok:
+        return "Login failed.....\nEmail: " + email + "\nPassword: " + password
+    # Redirect to /test-uploads
+    headers['Cookie'] = f'JSESSIONID={response.cookies["JSESSIONID"]}'
+    return "Login successful!.....\nEmail: " + email + "\nPassword: " + password
+
 
 @app.route('/fetch-sth')
 def fetch_sth():
