@@ -1,5 +1,4 @@
 import requests
-from bs4 import BeautifulSoup
 from flask import Flask
 
 app = Flask(__name__)
@@ -40,7 +39,7 @@ def submit_document():
 
     return 'Document submitted successfully!'
 
-@app.route('/test')
+@app.route('/')
 def test():
     return "Urls should be working!"
 
