@@ -1,47 +1,31 @@
-import requests
-from flask import Flask
+from flask import Flask, request, jsonify
+from openai import OpenAI
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
+client = OpenAI(api_key=os.getenv('api_key'))
 
-@app.route('/submit')
-def submit_document():
-    # Start a session
-    session = requests.Session()
+@app.route('/message', methods=['POST'])
+def get_message():
+  data = request.get_json()
+  user_message = data.get('message')
 
-    # Login
-    login_payload = {
-        'login_email': 'titutoo@mksu.ac.ke',
-        'login_password': 'Kimarutitoy'
-    }
-    login_req = session.post('http://ir.mksu.ac.ke/password-login', data=login_payload)
+  completion = client.chat.completions.create(
+    model="gpt-3.5-turbo",
+    messages=[
+      {"role": "system", "content": "You are a poetic assistant, skilled in explaining complex programming concepts with creative flair."},
+      {"role": "user", "content": user_message}
+    ]
+  )
 
-    # Check if login was successful
-    if login_req.status_code != 200:
-        return 'Login failed!'
-
-    # Submit document
-    submit_payload = {
-        'file': ('1.pdf', open('/uploads/1.pdf', 'rb')),
-        'dc_contributor_author_last': 'Machakos University',
-        'dc_title': '1 test(to be deleted)',
-        'dc_date_issued_year': '2022',
-        'dc_date_issued_month': 'December',
-        'dc_publisher': 'Machakos University Press',
-        'dc_type': 'Learning Object',
-        'dc_language': 'en',
-        'description': 'Past Examination Paper'
-    }
-    submit_req = session.post('http://ir.mksu.ac.ke/handle/123456780/219/submit', files=submit_payload)
-
-    # Check if submission was successful
-    if submit_req.status_code != 200:
-        return 'Submission failed!'
-
-    return 'Document submitted successfully!'
+  return jsonify({"response": completion.choices[0].message.content})  # Access the content attribute
 
 @app.route('/')
-def test():
-    return "Urls should be working!"
+def index():
+  return "We are live my bwoy"
 
 if __name__ == '__main__':
-    app.run(debug=True)
+  app.run(debug=True)
