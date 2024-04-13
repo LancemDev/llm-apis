@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 from openai import OpenAI
 import os
@@ -31,6 +31,10 @@ def get_message():
 @app.route('/')
 def index():
   return "We are live my bwoy"
+
+@app.route('/maps')
+def maps():
+  return render_template('maps.html')
 
 if __name__ == '__main__':
   app.run(debug=True)
