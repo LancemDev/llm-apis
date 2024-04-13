@@ -28,9 +28,26 @@ def get_message():
 
   return jsonify({"response": response})
 
+@app.route('/gregorian-sarcasm', methods=['POST'])
+def gregorian_sarcasm():
+  data = request.get_json()
+  user_message = data.get('message')
+
+  completion = client.chat.completions.create(
+    model="gpt-3.5-turbo",
+    messages=[
+      {"role": "system", "content": "You are an AI assistant, skilled in converting normal text to Gregorian sarcasm."},
+      {"role": "user", "content": user_message}
+    ]
+  )
+
+  response = completion.choices[0].message.content
+
+  return jsonify({"response": response})
+
 @app.route('/')
 def index():
-  return "We are live my bwoy"
+  return "Go to route /message to get a response from the AI model."
 
 @app.route('/maps')
 def maps():
