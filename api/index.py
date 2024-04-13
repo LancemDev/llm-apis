@@ -36,7 +36,7 @@ def gregorian_sarcasm():
   completion = client.chat.completions.create(
     model="gpt-3.5-turbo",
     messages=[
-      {"role": "system", "content": "You are an AI assistant, skilled in transforming normal text into a sarcastic tone. Please rewrite the following text in a sarcastic manner. Do not reply, just rewrite the text."},
+      {"role": "system", "content": "You are an AI assistant, skilled in rewriting the following text in a sarcastic manner. Do not reply, just rewrite the text."},
       {"role": "user", "content": user_message}
     ]
   )
