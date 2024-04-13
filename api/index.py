@@ -36,7 +36,7 @@ def gregorian_sarcasm():
   completion = client.chat.completions.create(
     model="gpt-3.5-turbo",
     messages=[
-      {"role": "system", "content": "You are an AI assistant, skilled in converting normal text to Gregorian sarcasm."},
+      {"role": "system", "content": "You are an AI assistant, skilled in transforming normal text into Gregorian sarcasm."},
       {"role": "user", "content": user_message}
     ]
   )
