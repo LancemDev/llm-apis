@@ -3,17 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Firesense</title>
     <!-- Add Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-database.js"></script>
+    <link rel="stylesheet" href="../static/index.css">
 </head>
 <body>
     This is the homepage
     <div id="data"></div>
 
-    <div id="smokeData"></div>
-    <div id="flameData"></div>
+    <div class="smoke" id="smokeData"></div>
+    <div class="flame" id="flameData"></div>
     <script>
         try {
             // Your project's config
