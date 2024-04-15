@@ -36,18 +36,18 @@
             // Listen for changes in the smoke data
             database.ref('Example/smoke').on('value', (snapshot) => {
                 const smokeData = snapshot.val();
-
-                if(smokeData == 0){
-                    document.getElementById('smokeData').innerText = "Smoke: " + "No smoke detected";
-                } else {
-                    document.getElementById('smokeData').innerText = "Smoke: " + "Smoke detected";
-                }
+                document.getElementById('smokeData').innerText = "Smoke: " + JSON.stringify(smokeData, null, 2);
             });
 
             // Listen for changes in the flame data
             database.ref('Example/flame').on('value', (snapshot) => {
                 const flameData = snapshot.val();
-                document.getElementById('flameData').innerText = "Flame: " + JSON.stringify(flameData, null, 2);
+                if(flameData == 0){
+                    document.getElementById('flameData').innerText = "Flame: No flame detected";
+                } else {
+                    // hide the div
+                    document.getElementById('flameData').remove();
+                }
             });
         } catch (error) {
             console.error("Error initializing Firebase or retrieving data: ", error);
