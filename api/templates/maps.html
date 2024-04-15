@@ -39,50 +39,15 @@
                         // Update the map center
                         map.setView([pos.lat, pos.lng], 13);
                     }
-
-                    // Remove the old marker if it exists
-                    if (marker) {
-                        map.removeLayer(marker);
-                    }
-
-                    // Add a new marker to the map at the current location
-                    marker = L.marker([pos.lat, pos.lng]).addTo(map);
-
-                    // Call the reverse geocoding API
-                    fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${pos.lat}&lon=${pos.lng}`)
-                        .then(response => response.json())
-                        .then(data => {
-                            console.log(data.display_name);
-                            // Hide the loading spinner
-                            loading.style.display = 'none';
-                        })
-                        .catch(error => {
-                            console.error(error);
-                            // Hide the loading spinner
-                            loading.style.display = 'none';
-                        });
-                }, function() {
-                    handleLocationError(true, map.getCenter());
                 });
-            } else {
-                // Browser doesn't support Geolocation
-                console.log("Your browser doesn't support geolocation.");
             }
         }
 
-        function handleLocationError(browserHasGeolocation, pos) {
-            console.log(browserHasGeolocation ?
-                                                        'Error: The Geolocation service failed.' :
-                                                        'Error: Your browser doesn\'t support geolocation.');
-            // Hide the loading spinner
-            loading.style.display = 'none';
-        }
-
-        // Get the location immediately when the page is loaded
+        // Call getLocation immediately
         getLocation();
 
-        // Update the location every 3 minutes
-        setInterval(getLocation, 180000);
+        // Then call getLocation every 5 seconds
+        setInterval(getLocation, 5000);
     </script>
 </body>
 </html>
