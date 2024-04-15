@@ -66,6 +66,9 @@ def login_post():
 
   if email == 'admin@gmail.com' and password == 'admin':
     return redirect('/homepage')
+  
+  # Add a return statement to handle the case when the email and password do not match
+  return "Invalid email or password", 401
 
 @app.route('/homepage')
 def homepage():
