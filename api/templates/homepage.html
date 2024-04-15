@@ -12,8 +12,6 @@
     <link rel="stylesheet" href="https://unpkg.com/@material-tailwind/html@latest/styles/material-tailwind.css" />
 </head>
 <body class="bg-gray-900">
-    This is the homepage
-    <div id="data"></div>
 
     <div id="flameData"></div>
 
@@ -26,7 +24,7 @@
     
     <!-- component -->
     <div class="max-w-sm mx-auto my-10">
-        <div class="bg-gray-900 shadow-lg rounded-lg p-6 space-y-4">
+        <div class="bg-gray-800 shadow-lg rounded-lg p-6 space-y-4">
             <div class="flex items-center space-x-4">
                 <div class="p-2 bg-purple-200 rounded-full">
                     <!-- Icon from Heroicons (https://heroicons.com/) -->
@@ -45,7 +43,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
                             </svg>
-                            122
+                            <div id="changeOfValue"></div>
                         </span>
                     </div>
                 </div>
@@ -72,10 +70,28 @@
 
             var database = firebase.database();
 
+            var lastSmokeReadTime = Date.now();
+
             // Listen for changes in the smoke data
             database.ref('Example/smoke').on('value', (snapshot) => {
                 const smokeData = snapshot.val();
-                document.getElementById('smokeData').innerText = "Smoke: " + JSON.stringify(smokeData, null, 2);
+                document.getElementById('smokeData').innerText = "" + JSON.stringify(smokeData, null, 2);
+
+                // Show or hide the alert based on the smoke value
+                var alertDiv = document.getElementById('alert');
+                if (smokeData == 0) {
+                    alertDiv.style.display = 'block';
+                } else {
+                    alertDiv.style.display = 'none';
+                }
+
+                // Calculate the difference between the last read time and the current time
+                var currentTime = Date.now();
+                var timeDifference = currentTime - lastSmokeReadTime;
+                document.getElementById('changeOfValue').innerText = "Time since last read: " + timeDifference + " ms";
+
+                // Update the last read time
+                lastSmokeReadTime = currentTime;
             });
 
             // Listen for changes in the flame data
