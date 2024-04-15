@@ -71,6 +71,7 @@
             var database = firebase.database();
 
             var lastSmokeReadTime = Date.now();
+            var lastSmokeValue = null;
 
             // Listen for changes in the smoke data
             database.ref('Example/smoke').on('value', (snapshot) => {
@@ -90,8 +91,15 @@
                 var timeDifference = currentTime - lastSmokeReadTime;
                 document.getElementById('changeOfValue').innerText = "Time since last read: " + timeDifference + " ms";
 
-                // Update the last read time
+                // Calculate the difference between the current smoke value and the last smoke value
+                if (lastSmokeValue !== null) {
+                    var valueDifference = smokeData - lastSmokeValue;
+                    document.getElementById('changeOfValue').innerText += "\nSmoke value difference: " + valueDifference;
+                }
+
+                // Update the last read time and the last smoke value
                 lastSmokeReadTime = currentTime;
+                lastSmokeValue = smokeData;
             });
 
             // Listen for changes in the flame data
