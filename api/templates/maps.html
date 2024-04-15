@@ -16,11 +16,11 @@
         var map;
         var marker;
         var loading = document.getElementById('loading');
-
+    
         function getLocation() {
             // Show the loading spinner
             loading.style.display = 'block';
-
+    
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function(position) {
                     var pos = {
@@ -28,7 +28,7 @@
                         lng: position.coords.longitude
                     };
                     console.log(pos);
-
+    
                     // Initialize the map if it's not already initialized
                     if (!map) {
                         map = L.map('map').setView([pos.lat, pos.lng], 13);
@@ -39,21 +39,33 @@
                         // Update the map center
                         map.setView([pos.lat, pos.lng], 13);
                     }
-
+    
                     // Remove the old marker if it exists
                     if (marker) {
                         map.removeLayer(marker);
                     }
-
+    
                     // Add a new marker at the current location
                     marker = L.marker([pos.lat, pos.lng]).addTo(map);
+    
+                    // Create a small bounding box around the current location
+                    var bounds = L.latLngBounds(
+                        L.latLng(pos.lat - 0.01, pos.lng - 0.01),
+                        L.latLng(pos.lat + 0.01, pos.lng + 0.01)
+                    );
+    
+                    // Fit the map view to the bounds
+                    map.fitBounds(bounds);
                 });
             }
         }
-
+    
         // Call getLocation immediately
         getLocation();
-
+    
         // Then call getLocation every 5 seconds
         setInterval(getLocation, 5000);
     </script>
+
+</body>
+</html>
