@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, redirect
 from flask_cors import CORS
 from openai import OpenAI
 import os
@@ -53,6 +53,25 @@ def index():
 @app.route('/maps')
 def maps():
   return render_template('maps.html')
+
+@app.route('/login', methods=['GET'])
+def login():
+  return render_template('login.html')
+
+@app.route('/login', methods=['POST'])
+def login_post():
+  data = request.form
+  email = data.get('email')
+  password = data.get('password')
+
+  if email == 'admin@gmail.com' and password == 'admin':
+    return redirect('/homepage')
+
+@app.route('/homepage')
+def homepage():
+  if not request.cookies.get('email'):
+    return redirect('/login')
+  return render_template('homepage.html')
 
 if __name__ == '__main__':
   app.run(debug=True)
