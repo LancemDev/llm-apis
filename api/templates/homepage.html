@@ -36,7 +36,12 @@
             // Listen for changes in the smoke data
             database.ref('Example/smoke').on('value', (snapshot) => {
                 const smokeData = snapshot.val();
-                document.getElementById('smokeData').innerText = "Smoke: " + JSON.stringify(smokeData, null, 2);
+
+                if(smokeData == 0){
+                    document.getElementById('smokeData').innerText = "Smoke: " + "No smoke detected";
+                } else {
+                    document.getElementById('smokeData').innerText = "Smoke: " + "Smoke detected";
+                }
             });
 
             // Listen for changes in the flame data
