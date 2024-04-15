@@ -683,6 +683,10 @@ video {
   border-bottom-width: 2px;
 }
 
+.border-l-4 {
+  border-left-width: 4px;
+}
+
 .border-none {
   border-style: none;
 }
@@ -731,6 +735,10 @@ video {
 
 .bg-no-repeat {
   background-repeat: no-repeat;
+}
+
+.p-4 {
+  padding: 1rem;
 }
 
 .px-1 {
