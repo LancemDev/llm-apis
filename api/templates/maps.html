@@ -37,8 +37,8 @@
                             maxZoom: 19,
                         }).addTo(map);
                     } else {
-                        // Update the map center
-                        map.setView([pos.lat, pos.lng], 13);
+                        // Update the map center without changing the zoom level
+                        map.panTo([pos.lat, pos.lng]);
                     }
 
                     // Remove the old marker if it exists
