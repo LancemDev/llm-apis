@@ -4,8 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <!-- Add Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-database.js"></script>
 </head>
 <body>
     This is the homepage
-</body>
+    <div id="data"></div>
+
+    <div id="smokeData"></div>
+    <div id="flameData"></div>
+    <script>
+        try {
+            // Your project's config
+            var firebaseConfig = {
+                apiKey: "mG5lgaXN8pifEOkGnyKcRtRvRS85jGKuniSR9Ybv",
+                authDomain: "tori-d9dd9.firebaseapp.com",
+                databaseURL: "https://tori-d9dd9.firebaseio.com",
+                projectId: "tori-d9dd9",
+                // storageBucket: "YOUR_STORAGE_BUCKET",
+                messagingSenderId: "478773278551",
+                // appId: "YOUR_APP_ID"
+            };
+
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+
+            var database = firebase.database();
+
+            // Listen for changes in the smoke data
+            database.ref('Example/smoke').on('value', (snapshot) => {
+                const smokeData = snapshot.val();
+                document.getElementById('smokeData').innerText = "Smoke: " + JSON.stringify(smokeData, null, 2);
+            });
+
+            // Listen for changes in the flame data
+            database.ref('Example/flame').on('value', (snapshot) => {
+                const flameData = snapshot.val();
+                document.getElementById('flameData').innerText = "Flame: " + JSON.stringify(flameData, null, 2);
+            });
+        } catch (error) {
+            console.error("Error initializing Firebase or retrieving data: ", error);
+        }
+    </script>
 </html>
