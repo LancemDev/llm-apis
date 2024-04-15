@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, render_template, redirect
+from flask import Flask, request, jsonify, render_template, redirect, make_response
 from flask_cors import CORS
 from openai import OpenAI
 import os
@@ -65,7 +65,9 @@ def login_post():
   password = data.get('password')
 
   if email == 'admin@gmail.com' and password == 'admin':
-    return redirect('/homepage')
+    response = make_response(redirect('/homepage'))
+    response.set_cookie('email', email)  # Set the email cookie
+    return response
   
   # Add a return statement to handle the case when the email and password do not match
   return "Invalid email or password", 401
