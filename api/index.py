@@ -48,7 +48,7 @@ def gregorian_sarcasm():
 
 @app.route('/')
 def index():
-  return "Go to route /message to get a response from the AI model."
+  return "Welcome to this service. If you're not Lance you might be lost."
 
 @app.route('/maps')
 def maps():
