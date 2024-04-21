@@ -1,0 +1,99 @@
+<!-- component -->
+<div class="max-w-sm mx-auto my-10">
+    <div class="bg-gray-800 shadow-lg rounded-lg p-6 space-y-4">
+        <div class="flex items-center space-x-4">
+            <div class="p-2 bg-purple-200 rounded-full">
+                <!-- Icon from Heroicons (https://heroicons.com/) -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a2 2 0 00-2-2h-3v4z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 15V7a2 2 0 012-2h10a2 2 0 012 2v8" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 15v4a2 2 0 002 2h3v-4" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 15h16" />
+                </svg>
+            </div>
+            <div>
+                <div class="text-white text-sm">Smoke Value</div>
+                <div class="text-white text-2xl font-semibold">
+                    <div id="smokeData"></div>
+                    <span class="text-purple-500 text-sm font-medium flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
+                        </svg>
+                        <div id="changeOfValue"></div>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<script>
+    try {
+        // Your project's config
+        var firebaseConfig = {
+            apiKey: "mG5lgaXN8pifEOkGnyKcRtRvRS85jGKuniSR9Ybv",
+            authDomain: "tori-d9dd9.firebaseapp.com",
+            databaseURL: "https://tori-d9dd9-default-rtdb.firebaseio.com/",
+            projectId: "tori-d9dd9",
+            // storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "478773278551",
+            // appId: "YOUR_APP_ID"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        var database = firebase.database();
+
+        var lastSmokeReadTime = Date.now();
+        var lastSmokeValue = null;
+
+        // Listen for changes in the smoke data
+        database.ref('Example/smoke').on('value', (snapshot) => {
+            const smokeData = snapshot.val();
+            document.getElementById('smokeData').innerText = "" + JSON.stringify(smokeData, null, 2);
+
+            // Show or hide the alert based on the smoke value
+            var alertDiv = document.getElementById('alert');
+            if (smokeData == 0) {
+                alertDiv.style.display = 'block';
+            } else {
+                alertDiv.style.display = 'none';
+            }
+
+            // Calculate the difference between the last read time and the current time
+            var currentTime = Date.now();
+            var timeDifference = currentTime - lastSmokeReadTime;
+            document.getElementById('changeOfValue').innerText = "Time since last read: " + timeDifference + " ms";
+
+            // Calculate the difference between the current smoke value and the last smoke value
+            if (lastSmokeValue !== null) {
+                var valueDifference = smokeData - lastSmokeValue;
+                document.getElementById('changeOfValue').innerText += "\nSmoke value difference: " + valueDifference;
+            }
+
+            // Update the last read time and the last smoke value
+            lastSmokeReadTime = currentTime;
+            lastSmokeValue = smokeData;
+        });
+
+        // Listen for changes in the flame data
+        database.ref('Example/flame').on('value', (snapshot) => {
+            const flameData = snapshot.val();
+            if(flameData == 0){
+                document.getElementById('flameData').innerText = "Flame: No flame detected";
+            } else {
+                // hide the div
+                document.getElementById('flameData').remove();
+            }
+        });
+    } catch (error) {
+        console.error("Error initializing Firebase or retrieving data: ", error);
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+</html>

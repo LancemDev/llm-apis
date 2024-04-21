@@ -1,128 +1,221 @@
+<!-- component -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Firesense</title>
-    <!-- Add Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-database.js"></script>
-    <link rel="stylesheet" href="../static/output.css">
-    <!-- stylesheet -->
-    <link rel="stylesheet" href="https://unpkg.com/@material-tailwind/html@latest/styles/material-tailwind.css" />
+    <title>Mi Página con Tailwind</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
-<body class="bg-gray-900">
-    <div class="w-full text-white bg-gray-800 dark-mode:text-gray-200 dark-mode:bg-gray-800">
-    <div x-data="{ open: false }" class="flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
-        <div class="p-4 flex flex-row items-center justify-between">
-        <a href="#" class="text-lg font-semibold tracking-widest text-gray-900 uppercase rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline">FIRE DETECTION AND CONTROL SYSTEM FOR MACHAKOS LEVEL V REFERRAL HOSPITAL</a>
-    </div>
-    </div>
-    <!-- SIDEBAR -->
-    
 
-    <div id="flameData"></div>
-
-    <div id="alert" class="alert font-regular relative block w-full bg-red-500 p-4 text-base leading-5 text-white">
-        <div class="alert-content mr-12">THE HOUSE IS ON FIRE! PLEASE CONTACT 911</div>
-        <div class="alert-dismiss absolute top-2.5 right-3 w-max rounded-lg transition-all hover:bg-white hover:bg-opacity-20">
-        </div>
-    </div>
-        
-    
-    <!-- component -->
-    <div class="max-w-sm mx-auto my-10">
-        <div class="bg-gray-800 shadow-lg rounded-lg p-6 space-y-4">
-            <div class="flex items-center space-x-4">
-                <div class="p-2 bg-purple-200 rounded-full">
-                    <!-- Icon from Heroicons (https://heroicons.com/) -->
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a2 2 0 00-2-2h-3v4z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 15V7a2 2 0 012-2h10a2 2 0 012 2v8" />
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 15v4a2 2 0 002 2h3v-4" />
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 15h16" />
-                    </svg>
-                </div>
-                <div>
-                    <div class="text-white text-sm">Smoke Value</div>
-                    <div class="text-white text-2xl font-semibold">
-                        <div id="smokeData"></div>
-                        <span class="text-purple-500 text-sm font-medium flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
-                            </svg>
-                            <div id="changeOfValue"></div>
-                        </span>
-                    </div>
-                </div>
+<body>
+    <nav class="bg-white border-b border-gray-300">
+        <div class="flex justify-between items-center px-6">
+            <!-- Ícono de Menú (cyan) -->
+            <button id="menu-button" onclick="expandSidebar()">
+                <i class="fas fa-bars text-cyan-500 text-lg"></i>
+            </button>
+            <!-- Logo (centrado) -->
+            <div class="mx-auto">
+                <img src="https://www.emprenderconactitud.com/img/POC%20WCS%20(1).png" alt="logo" class="h-20 w-28">
+            </div>
+            <!-- Ícono de Notificación y Perfil -->
+            <div class="space-x-4">
+                <button>
+                    <i class="fas fa-bell text-cyan-500 text-lg"></i>
+                </button>
+                <!-- Botón de Perfil -->
+                <button>
+                    <i class="fas fa-user text-cyan-500 text-lg"></i>
+                </button>
             </div>
         </div>
+    </nav>
+    
+
+ <!-- Barra lateral -->
+<div id="sidebar" class="w-28 bg-white h-screen fixed rounded-none border-none transition-all duration-200 ease-in-out overflow-hidden">
+    <!-- Items -->
+    <div class="p-2 space-y-4">
+        <!-- Inicio -->
+        <button class="relative px-3 py-3 flex items-center space-x-4 justify-start text-gray-500 rounded-lg group" onclick="highlightSidebarItem(this)">
+            <i class="fas fa-home text-lg"></i>
+            <span class="font-medium transition-all duration-200 opacity-0">Inicio</span>
+        </button>
+
+        <!-- Autorizaciones -->
+        <button class="relative px-3 py-3 flex items-center space-x-4 justify-start text-gray-500 rounded-lg group" onclick="highlightSidebarItem(this)">
+            <i class="fas fa-check-circle"></i>
+            <span class="font-medium transition-all duration-200 opacity-0">Autorizaciones</span>
+        </button>
+
+        <!-- Usuarios -->
+        <button class="relative px-3 py-3 flex items-center space-x-4 justify-start text-gray-500 rounded-lg group" onclick="highlightSidebarItem(this)">
+            <i class="fas fa-users"></i>
+            <span class="font-medium transition-all duration-200 opacity-0">Usuarios</span>
+        </button>
+
+        <!-- Comercios -->
+        <button class="relative px-3 py-3 flex items-center space-x-4 justify-start text-gray-500 rounded-lg group" onclick="highlightSidebarItem(this)">
+            <i class="fas fa-store"></i>
+            <span class="font-medium transition-all duration-200 opacity-0">Comercios</span>
+        </button>
+
+        <!-- Transacciones -->
+        <button class="relative px-3 py-3 flex items-center space-x-4 justify-start text-gray-500 rounded-lg group" onclick="highlightSidebarItem(this)">
+            <i class="fas fa-exchange-alt"></i>
+            <span class="font-medium transition-all duration-200 opacity-0">Transacciones</span>
+        </button>
+
+        <!-- Cerrar sesión -->
+        <button class="relative px-3 py-3 flex items-center space-x-4 justify-start text-gray-500 rounded-lg group" onclick="highlightSidebarItem(this)">
+            <i class="fas fa-sign-out-alt"></i>
+            <span class="font-medium transition-all duration-200 opacity-0">Cerrar sesión</span>
+        </button>
+    </div>
+</div>
+
+
+<!-- Contenedor gris al lado de la barra lateral -->
+<div class="ml-16 bg-gray-100 h-screen fixed w-full lg:w-3/4 transition-all duration-200 ease-in-out">
+
+    <!-- Buscador con Icono -->
+    <div class="flex items-center w-full mt-2 p-4">
+        <div class="relative w-full">
+            <span class="absolute inset-y-0 left-0 pl-3 flex items-center">
+                <i class="fas fa-search text-gray-200"></i>
+            </span>
+            <input type="text" class="pl-10 pr-4 py-2 rounded-full border border-gray-300 w-full text-sm placeholder-gray-400" placeholder="Buscar..." />
+        </div>
     </div>
 
+ <!-- Contenedor de las 4 secciones -->
+<div class="grid grid-cols-2 gap-4 mt-2 p-4">
+    <!-- Sección 1 - Gráfica de Usuarios -->
+    <div class="bg-white p-4 rounded-md">
+        <h2 class="text-gray-600 text-lg font-semibold pb-4">Usuarios</h2>
+        <div class="chart-container" style="position: relative; height:200px; width:200px">
+            <!-- El canvas para la gráfica -->
+            <canvas id="usersChart"></canvas>
+        </div>
+    </div>
 
-    <script>
-        try {
-            // Your project's config
-            var firebaseConfig = {
-                apiKey: "mG5lgaXN8pifEOkGnyKcRtRvRS85jGKuniSR9Ybv",
-                authDomain: "tori-d9dd9.firebaseapp.com",
-                databaseURL: "https://tori-d9dd9-default-rtdb.firebaseio.com/",
-                projectId: "tori-d9dd9",
-                // storageBucket: "YOUR_STORAGE_BUCKET",
-                messagingSenderId: "478773278551",
-                // appId: "YOUR_APP_ID"
-            };
+    <!-- Sección 2 - Gráfica de Comercios -->
+    <div class="bg-white p-4 rounded-md">
+        <h2 class="text-gray-600 text-lg font-semibold pb-4">Comercios</h2>
+        <div class="chart-container" style="position: relative; height:200px; width:200px">
+            <!-- El canvas para la gráfica -->
+            <canvas id="commercesChart"></canvas>
+        </div>
+    </div>
 
-            // Initialize Firebase
-            firebase.initializeApp(firebaseConfig);
+    <!-- Sección 3 - Tabla de Autorizaciones Pendientes -->
+    <div class="bg-white p-4 rounded-md">
+        <h2 class="text-gray-600 text-lg font-semibold pb-4">Autorizaciones Pendientes</h2>
+        <table class="w-full table-auto">
+            <thead>
+                <tr class="text-sm leading-normal">
+                    <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Foto</th>
+                    <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Nombre</th>
+                    <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light text-right">Rol</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="hover:bg-grey-lighter">
+                    <td class="py-4 px-6 border-b border-grey-light"><img src="https://via.placeholder.com/40" alt="Foto Perfil" class="rounded-full h-10 w-10"></td>
+                    <td class="py-4 px-6 border-b border-grey-light">Juan Pérez</td>
+                    <td class="py-4 px-6 border-b border-grey-light text-right">Administrador</td>
+                </tr>
+                <!-- Añade más filas aquí como la anterior para cada autorización pendiente -->
+            </tbody>
+        </table>
+    </div>
 
-            var database = firebase.database();
+    <!-- Sección 4 - Tabla de Transacciones -->
+    <div class="bg-white p-4 rounded-md">
+        <h2 class="text-gray-600 text-lg font-semibold pb-4">Transacciones</h2>
+        <table class="w-full table-auto">
+            <thead>
+                <tr class="text-sm leading-normal">
+                    <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Nombre</th>
+                    <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Fecha</th>
+                    <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light text-right">Monto</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="hover:bg-grey-lighter">
+                    <td class="py-4 px-6 border-b border-grey-light">Carlos Sánchez</td>
+                    <td class="py-4 px-6 border-b border-grey-light">27/07/2023</td>
+                    <td class="py-4 px-6 border-b border-grey-light text-right">$1500</td>
+                </tr>
+                <!-- Añade más filas aquí como la anterior para cada transacción -->
+            </tbody>
+        </table>
+    </div>
+</div>
 
-            var lastSmokeReadTime = Date.now();
-            var lastSmokeValue = null;
+<script>
+    function expandSidebar() {
+        const sidebar = document.getElementById('sidebar');
+        const mainContent = document.querySelector('.ml-16');
 
-            // Listen for changes in the smoke data
-            database.ref('Example/smoke').on('value', (snapshot) => {
-                const smokeData = snapshot.val();
-                document.getElementById('smokeData').innerText = "" + JSON.stringify(smokeData, null, 2);
-
-                // Show or hide the alert based on the smoke value
-                var alertDiv = document.getElementById('alert');
-                if (smokeData == 0) {
-                    alertDiv.style.display = 'block';
-                } else {
-                    alertDiv.style.display = 'none';
-                }
-
-                // Calculate the difference between the last read time and the current time
-                var currentTime = Date.now();
-                var timeDifference = currentTime - lastSmokeReadTime;
-                document.getElementById('changeOfValue').innerText = "Time since last read: " + timeDifference + " ms";
-
-                // Calculate the difference between the current smoke value and the last smoke value
-                if (lastSmokeValue !== null) {
-                    var valueDifference = smokeData - lastSmokeValue;
-                    document.getElementById('changeOfValue').innerText += "\nSmoke value difference: " + valueDifference;
-                }
-
-                // Update the last read time and the last smoke value
-                lastSmokeReadTime = currentTime;
-                lastSmokeValue = smokeData;
-            });
-
-            // Listen for changes in the flame data
-            database.ref('Example/flame').on('value', (snapshot) => {
-                const flameData = snapshot.val();
-                if(flameData == 0){
-                    document.getElementById('flameData').innerText = "Flame: No flame detected";
-                } else {
-                    // hide the div
-                    document.getElementById('flameData').remove();
-                }
-            });
-        } catch (error) {
-            console.error("Error initializing Firebase or retrieving data: ", error);
+        if (sidebar.style.width === '16rem') {
+            sidebar.style.width = '4rem';
+            mainContent.style.marginLeft = '4rem';
+            sidebar.classList.remove('text-left', 'px-6');
+            sidebar.classList.add('text-center', 'px-0');
+        } else {
+            sidebar.style.width = '16rem';
+            mainContent.style.marginLeft = '16rem';
+            sidebar.classList.add('text-left', 'px-6');
+            sidebar.classList.remove('text-center', 'px-0');
         }
-    </script>
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-</html>
+
+        const labels = sidebar.querySelectorAll('span');
+        labels.forEach(label => label.classList.toggle('opacity-0'));
+    }
+
+    function highlightSidebarItem(element) {
+    const buttons = document.querySelectorAll("#sidebar button");
+    buttons.forEach(btn => {
+        btn.classList.remove('bg-gradient-to-r', 'from-cyan-400', 'to-cyan-500', 'text-white', 'w-48', 'ml-0');
+        btn.firstChild.nextSibling.classList.remove('text-white');
+    });
+    element.classList.add('bg-gradient-to-r', 'from-cyan-400', 'to-cyan-500', 'w-56', 'h-10','ml-0');
+    element.firstChild.nextSibling.classList.add('text-white');
+    }
+
+    // Para la gráfica de Usuarios
+    var ctx = document.getElementById('usersChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Usuarios Nuevos', 'Usuarios Registrados'],
+            datasets: [{
+                data: [50, 50],
+                backgroundColor: ['cyan', 'yellow'],
+            }]
+        },
+        options: {
+            responsive: true,
+        }
+    });
+
+    // Para la gráfica de Comercios
+    var ctx2 = document.getElementById('commercesChart').getContext('2d');
+    new Chart(ctx2, {
+        type: 'doughnut',
+        data: {
+            labels: ['Comercios Nuevos', 'Comercios Registrados'],
+            datasets: [{
+                data: [60, 40],
+                backgroundColor: ['cyan', 'yellow'],
+            }]
+        },
+        options: {
+            responsive: true,
+        }
+    });
+</script>
