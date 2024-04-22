@@ -9,9 +9,22 @@
 <body>
     <form action="/login" method="POST">
         <main class="mx-auto flex min-h-screen w-full items-center justify-center bg-gray-900 text-white">
+            <nav class="bg-gray-800 border-b border-gray-300 py-4">
+                <div class="flex justify-between items-center px-8">
+                    <!-- Ícono de Menú (cyan) -->
+                    <button id="menu-button" onclick="expandSidebar()">
+                        <i class="fas fa-bars text-cyan-500 text-lg"></i>
+                    </button>
+                    <!-- Logo (centrado) -->
+                    <div class="mx-auto text-white">
+                        FIRE DETECTION AND CONTROL SYSTEM FOR MACHAKOS LEVEL V REFERRAL HOSPITAL
+                    </div>
+
+                </div>
+            </nav>
             
             <section class="flex w-[30rem] flex-col space-y-10">
-                <div class="text-center text-4xl font-medium">LOGIN TO FIRE DETECTION AND CONTROL SYSTEM FOR MACHAKOS LEVEL V REFERRAL HOSPITAL</div>
+                <div class="text-center text-4xl font-medium">LOGIN</div>
                 <div class="w-full transform border-b-2 bg-transparent text-lg duration-300 focus-within:border-indigo-500">
                     <input type="text" name="email" placeholder="Email" class="w-full border-none bg-transparent outline-none placeholder:italic focus:outline-none" />
                 </div>
