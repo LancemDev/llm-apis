@@ -82,5 +82,10 @@ app.route('/landing')
 def landing():
   return render_template('landing.html')
 
+app.route('/update-account')
+def update_account():
+  return render_template('update-account.html')
+
+
 if __name__ == '__main__':
   app.run(debug=True)
