@@ -283,12 +283,12 @@
             document.getElementById('smokeData').innerText = "" + JSON.stringify(smokeData, null, 2);
 
             // Show or hide the alert based on the smoke value
-            var alertDiv = document.getElementById('alert');
-            if (smokeData == 0) {
-                alertDiv.style.display = 'block';
-            } else {
-                alertDiv.style.display = 'none';
-            }
+            // var alertDiv = document.getElementById('alert');
+            // if (smokeData == 0) {
+            //     alertDiv.style.display = 'block';
+            // } else {
+            //     alertDiv.style.display = 'none';
+            // }
 
             // Calculate the difference between the last read time and the current time
             var currentTime = Date.now();
