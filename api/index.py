@@ -92,6 +92,14 @@ def logout():
   response.set_cookie('email', '', expires=0) 
   return response
 
+@app.route('/contact', methods=['GET'])
+def contact():
+  return render_template('contact.html')
+
+@app.route('/training', methods=['GET'])
+def training():
+  return render_template('training.html')
+
 
 if __name__ == '__main__':
   app.run(debug=True)
