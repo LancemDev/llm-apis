@@ -127,12 +127,6 @@
             <div id="alertFlame" class="font-regular relative block w-full rounded-lg bg-red-500 p-4 text-base leading-5 text-white opacity-100">
                 Alert primary
               </div>
-              
-              <div class="w-full pt-5 px-4 mb-8 mx-auto ">
-                  <div class="text-sm text-gray-700 py-1">
-                      Made with <a class="text-gray-700 font-semibold" href="https://www.material-tailwind.com/docs/html/alert?ref=tailwindcomponents" target="_blank">Material Tailwind</a> by <a href="https://www.creative-tim.com?ref=tailwindcomponents" class="text-gray-700 font-semibold" target="_blank"> Creative Tim</a>.
-                  </div>
-              </div>
             </div>
     </div>
 
@@ -327,7 +321,7 @@
             const flameData = snapshot.val();
             var alertFlameDiv = document.getElementById('alertFlame');
         
-            if(flameData == 0){
+            if(flameData == 1){
                 document.getElementById('flameData').innerText = "Flame: There's a fire detected at Sensor 1";
                 alertFlameDiv.style.display = 'none'; // hide the div
             } else {
