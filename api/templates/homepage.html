@@ -305,10 +305,9 @@
         database.ref('Example/flame').on('value', (snapshot) => {
             const flameData = snapshot.val();
             if(flameData == 0){
-                document.getElementById('flameData').innerText = "Flame: No flame detected";
+                document.getElementById('flameData').innerText = "Flame: There's a fire detected at Sensor 1";
             } else {
-                // hide the div
-                document.getElementById('flameData').remove();
+                document.getElementById('flameData').innerText = "Flame: No flame detected";
             }
         });
     } catch (error) {
