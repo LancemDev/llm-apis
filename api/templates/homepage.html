@@ -86,11 +86,21 @@
 
         <!-- Cerrar sesión -->
         <a href="/logout">
-            <button class="relative px-3 py-3 flex items-center space-x-4 justify-start text-gray-500 rounded-lg group" onclick="highlightSidebarItem(this)">
+            <button class="relative px-3 py-3 flex items-center space-x-4 justify-start text-gray-500 rounded-lg group" onclick="confirmLogout()">
                 <i class="fas fa-sign-out-alt"></i>
                 <span class="font-medium transition-all duration-200 opacity-0">Logout</span>
             </button>
         </a>
+    </div>
+
+    <script>
+        function confirmLogout() {
+            if (confirm("Are you sure you want to log out?")) {
+                // Perform logout action
+                window.location.href = "/logout";
+            }
+        }
+    </script>
     </div>
 </div>
 
