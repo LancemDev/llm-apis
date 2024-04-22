@@ -78,5 +78,9 @@ def homepage():
     return redirect('/login')
   return render_template('homepage.html')
 
+app.route('/landing')
+def landing():
+  return render_template('landing.html')
+
 if __name__ == '__main__':
   app.run(debug=True)

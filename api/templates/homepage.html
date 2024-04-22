@@ -45,43 +45,54 @@
     <!-- Items -->
     <div class="p-2 space-y-4">
         <!-- Inicio -->
-        <button class="relative px-3 py-3 flex items-center space-x-4 justify-start text-gray-500 rounded-lg group" onclick="highlightSidebarItem(this)">
-            <i class="fas fa-home text-lg"></i>
-            <span class="font-medium transition-all duration-200 opacity-0">Home</span>
-        </button>
+        <a href="/home">
+            <button class="relative px-3 py-3 flex items-center space-x-4 justify-start text-gray-500 rounded-lg group" onclick="highlightSidebarItem(this)">
+                <i class="fas fa-home text-lg"></i>
+                <span class="font-medium transition-all duration-200 opacity-0">Home</span>
+            </button>
+        </a>
 
         <!-- Autorizaciones -->
-        <button class="relative px-3 py-3 flex items-center space-x-4 justify-start text-gray-500 rounded-lg group" onclick="highlightSidebarItem(this)">
-            <i class="fas fa-check-circle"></i>
-            <span class="font-medium transition-all duration-200 opacity-0">Autorizaciones</span>
-        </button>
+        <a href="/autorizaciones">
+            <button class="relative px-3 py-3 flex items-center space-x-4 justify-start text-gray-500 rounded-lg group" onclick="highlightSidebarItem(this)">
+                <i class="fas fa-check-circle"></i>
+                <span class="font-medium transition-all duration-200 opacity-0">Autorizaciones</span>
+            </button>
+        </a>
 
         <!-- Usuarios -->
-        <button class="relative px-3 py-3 flex items-center space-x-4 justify-start text-gray-500 rounded-lg group" onclick="highlightSidebarItem(this)">
-            <i class="fas fa-users"></i>
-            <span class="font-medium transition-all duration-200 opacity-0">Contacts</span>
-        </button>
+        <a href="/contacts">
+            <button class="relative px-3 py-3 flex items-center space-x-4 justify-start text-gray-500 rounded-lg group" onclick="highlightSidebarItem(this)">
+                <i class="fas fa-users"></i>
+                <span class="font-medium transition-all duration-200 opacity-0">Contacts</span>
+            </button>
+        </a>
 
         <!-- Comercios -->
-        <button class="relative px-3 py-3 flex items-center space-x-4 justify-start text-gray-500 rounded-lg group" onclick="highlightSidebarItem(this)">
-            <i class="fas fa-store"></i>
-            <span class="font-medium transition-all duration-200 opacity-0">Comercios</span>
-        </button>
+        <a href="/comercios">
+            <button class="relative px-3 py-3 flex items-center space-x-4 justify-start text-gray-500 rounded-lg group" onclick="highlightSidebarItem(this)">
+                <i class="fas fa-store"></i>
+                <span class="font-medium transition-all duration-200 opacity-0">Comercios</span>
+            </button>
+        </a>
 
         <!-- Transacciones -->
-        <button class="relative px-3 py-3 flex items-center space-x-4 justify-start text-gray-500 rounded-lg group" onclick="highlightSidebarItem(this)">
-            <i class="fas fa-exchange-alt"></i>
-            <span class="font-medium transition-all duration-200 opacity-0">Update Account</span>
-        </button>
+        <a href="/update-account">
+            <button class="relative px-3 py-3 flex items-center space-x-4 justify-start text-gray-500 rounded-lg group" onclick="highlightSidebarItem(this)">
+                <i class="fas fa-exchange-alt"></i>
+                <span class="font-medium transition-all duration-200 opacity-0">Update Account</span>
+            </button>
+        </a>
 
         <!-- Cerrar sesión -->
-        <button class="relative px-3 py-3 flex items-center space-x-4 justify-start text-gray-500 rounded-lg group" onclick="highlightSidebarItem(this)">
-            <i class="fas fa-sign-out-alt"></i>
-            <span class="font-medium transition-all duration-200 opacity-0">Logout</span>
-        </button>
+        <a href="/logout">
+            <button class="relative px-3 py-3 flex items-center space-x-4 justify-start text-gray-500 rounded-lg group" onclick="highlightSidebarItem(this)">
+                <i class="fas fa-sign-out-alt"></i>
+                <span class="font-medium transition-all duration-200 opacity-0">Logout</span>
+            </button>
+        </a>
     </div>
 </div>
-
 
 <!-- Contenedor gris al lado de la barra lateral -->
 <div class="ml-16 bg-gray-100 h-screen fixed w-full lg:w-3/4 transition-all duration-200 ease-in-out">
