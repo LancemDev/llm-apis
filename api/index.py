@@ -78,11 +78,11 @@ def homepage():
     return redirect('/login')
   return render_template('homepage.html')
 
-app.route('/landing', methods=['GET'])
+@app.route('/landing', methods=['GET'])
 def landing():
   return render_template('landing.html')
 
-app.route('/update-account', methods=['GET'])
+@app.route('/update-account', methods=['GET'])
 def update_account():
   return render_template('update-account.html')
 
