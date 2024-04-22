@@ -322,10 +322,10 @@
             var alertFlameDiv = document.getElementById('alertFlame');
         
             if(flameData == 1){
-                document.getElementById('flameData').innerText = "Flame: There's a fire detected at Sensor 1";
+                document.getElementById('flameData').innerText = "Flame: No Flame detected";
                 alertFlameDiv.style.display = 'none'; // hide the div
             } else {
-                document.getElementById('flameData').innerText = "Flame: No flame detected";
+                document.getElementById('flameData').innerText = "Flame: There's a fire detected at Sensor 1";
                 alertFlameDiv.style.display = 'block'; // show the div
             }
         });
