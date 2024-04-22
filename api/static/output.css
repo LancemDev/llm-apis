@@ -1083,7 +1083,7 @@ video {
 }
 
 .bg-login-background {
-  background-image: url('/images/login-background.png');
+  background-image: url('../images/login-background.png');
 }
 
 .from-cyan-400 {
