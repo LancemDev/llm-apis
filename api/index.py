@@ -92,7 +92,7 @@ def logout():
   response.set_cookie('email', '', expires=0) 
   return response
 
-@app.route('/contact', methods=['GET'])
+@app.route('/contacts', methods=['GET'])
 def contact():
   return render_template('contact.html')
 
