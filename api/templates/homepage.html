@@ -87,7 +87,7 @@
             <span class="absolute inset-y-0 left-0 pl-3 flex items-center">
                 <i class="fas fa-search text-gray-200"></i>
             </span>
-            <input type="text" class="pl-10 pr-4 py-2 rounded-full border border-gray-300 w-full text-sm placeholder-gray-400" placeholder="Buscar..." />
+            <input type="text" class="pl-10 pr-4 py-2 rounded-full border border-gray-300 w-full text-sm placeholder-gray-400" placeholder="Search..." />
         </div>
     </div>
 
@@ -135,22 +135,31 @@
 
     <!-- Sección 4 - Tabla de Transacciones -->
     <div class="bg-white p-4 rounded-md">
-        <h2 class="text-gray-600 text-lg font-semibold pb-4">Transacciones</h2>
+        <h2 class="text-gray-600 text-lg font-semibold pb-4">Past Smoke Sensor Readings</h2>
         <table class="w-full table-auto">
             <thead>
                 <tr class="text-sm leading-normal">
-                    <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Nombre</th>
-                    <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Fecha</th>
-                    <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light text-right">Monto</th>
+                    <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Value</th>
+                    <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light text-right">Time</th>
                 </tr>
             </thead>
             <tbody>
                 <tr class="hover:bg-grey-lighter">
-                    <td class="py-4 px-6 border-b border-grey-light">Carlos Sánchez</td>
-                    <td class="py-4 px-6 border-b border-grey-light">27/07/2023</td>
-                    <td class="py-4 px-6 border-b border-grey-light text-right">$1500</td>
+                    <td class="py-4 px-6 border-b border-grey-light">233</td>
+                    <td class="py-4 px-6 border-b border-grey-light text-right">10 minutes ago</td>
                 </tr>
-                <!-- Añade más filas aquí como la anterior para cada transacción -->
+                <tr class="hover:bg-grey-lighter">
+                    <td class="py-4 px-6 border-b border-grey-light">200</td>
+                    <td class="py-4 px-6 border-b border-grey-light text-right">20 minutes ago</td>
+                </tr>
+                <tr class="hover:bg-grey-lighter">
+                    <td class="py-4 px-6 border-b border-grey-light">180</td>
+                    <td class="py-4 px-6 border-b border-grey-light text-right">30 minutes ago</td>
+                </tr>
+                <tr class="hover:bg-grey-lighter">
+                    <td class="py-4 px-6 border-b border-grey-light">150</td>
+                    <td class="py-4 px-6 border-b border-grey-light text-right">40 minutes ago</td>
+                </tr>
             </tbody>
         </table>
     </div>
