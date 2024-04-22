@@ -86,6 +86,12 @@ def landing():
 def update_account():
   return render_template('update-account.html')
 
+@app.route('/logout', methods=['GET'])
+def logout():
+  response = make_response(redirect('/login'))
+  response.set_cookie('email', '', expires=0) 
+  return response
+
 
 if __name__ == '__main__':
   app.run(debug=True)
