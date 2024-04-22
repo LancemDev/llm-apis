@@ -100,6 +100,10 @@ def contact():
 def training():
   return render_template('training.html')
 
+@app.route('/buttons', methods=['GET'])
+def buttons():
+  return render_template('buttons.html')
+
 
 if __name__ == '__main__':
   app.run(debug=True)

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buttons</title>
+    <!-- Add Firebase JavaScript SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-database.js"></script>
+</head>
+<body>
+    <div>
+        <button id="setToOne" class="btn btn-success">Set to 1</button>
+        <button id="setToZero" class="btn btn-danger">Set to 0</button>
+    </div>
+
+    <script>
+        // Initialize Firebase
+        var firebaseConfig = {
+            apiKey: "mG5lgaXN8pifEOkGnyKcRtRvRS85jGKuniSR9Ybv",
+            authDomain: "tori-d9dd9.firebaseapp.com",
+            databaseURL: "https://tori-d9dd9-default-rtdb.firebaseio.com/",
+            projectId: "tori-d9dd9",
+            // storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "478773278551",
+            // appId: "YOUR_APP_ID"
+        };
+        firebase.initializeApp(firebaseConfig);
+
+        // Get a reference to the database service
+        var database = firebase.database();
+
+        // Get buttons
+        var setToOneButton = document.getElementById('setToOne');
+        var setToZeroButton = document.getElementById('setToZero');
+
+        // Add event listeners
+        setToOneButton.addEventListener('click', function() {
+            database.ref('Example/flame').set(1);
+        });
+
+        setToZeroButton.addEventListener('click', function() {
+            database.ref('Example/flame').set(0);
+        });
+    </script>
+</body>
+</html>
