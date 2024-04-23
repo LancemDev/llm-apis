@@ -48,7 +48,7 @@ def gregorian_sarcasm():
 
 @app.route('/')
 def index():
-  return "Welcome to this service. If you're not Lance you might be lost."
+  return "Hello"
 
 @app.route('/maps')
 def maps():
