@@ -49,26 +49,25 @@ def gregorian_sarcasm():
 
 @app.route('/policy', methods=['POST'])
 def policy():
-    data = request.get_json()
-    company_name = data.get('companyName')
-    website_url = data.get('websiteUrl')
-    data_processing_activities = data.get('dataProcessingActivities')
+  data = request.get_json()
+  company_name = data.get('companyName')
+  website_url = data.get('websiteUrl')
+  data_processing_activities = data.get('dataProcessingActivities')
 
-    # Prepare the system message
-    system_message = "You are a helpful AI that generates privacy policies. The company's name is {}, their website is {}, and they perform the following data processing activities: {}.".format(company_name, website_url, ', '.join(data_processing_activities))
+  # Prepare the system message
+  system_message = "You are a helpful AI that generates privacy policies. The company's name is {}, their website is {}, and they perform the following data processing activities: {}.".format(company_name, website_url, ', '.join(data_processing_activities))
 
+  completion = client.chat.completions.create(
+    model="gpt-3.5-turbo",
+    messages=[
+      {"role": "system", "content": system_message},
+      {"role": "user", "content": "Generate a privacy policy for my company, {}.".format(company_name)}
+    ]
+  )
 
-    completion = client.chat.completions.create(
-        model="pt-3.5-turbo",
-        messages = [
-            {"role": "system", "content": system_message}
-            {"role": "user", "content": "Generate a privacy policy for my company, {}.".format(company_name)}
-        ]
-    )
+  response = completion.choices[0].message.content
 
-    response = completion.choices[0].message.content
-
-    return jsonify({"response": response})
+  return jsonify({"response": response})
 
 
 
