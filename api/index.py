@@ -57,17 +57,22 @@ def policy():
     # Prepare the system message
     system_message = "You are a helpful AI that generates privacy policies. The company's name is {}, their website is {}, and they perform the following data processing activities: {}.".format(company_name, website_url, ', '.join(data_processing_activities))
 
-    # Generate the policy using OpenAI's model
-    completion = openai.Completion.create(
-        engine="text-davinci-002",
+    # Initialize OpenAI client (assuming you have an API key set up)
+    openai = OpenAI()
+
+    # Generate the policy using the completions API
+    response = openai.completion.create(
+        engine="gpt-3.5-turbo-instruct",
         prompt=system_message,
         temperature=0.5,
         max_tokens=1000
     )
 
-    policy = completion.choices[0].text.strip()
+    # Extract the policy text from the response
+    policy = response.choices[0].text.strip()
 
     return jsonify({"policy": policy})
+
 
 
 @app.route('/gdpr-assistant', methods=['POST'])
