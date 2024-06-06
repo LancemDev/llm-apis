@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify, render_template, redirect, make_response
 from flask_cors import CORS
 from openai import OpenAI
+import openai
 import os
 from dotenv import load_dotenv
 
@@ -45,6 +46,7 @@ def gregorian_sarcasm():
 
     return jsonify({"response": response})
 
+
 @app.route('/policy', methods=['POST'])
 def policy():
     data = request.get_json()
@@ -56,15 +58,14 @@ def policy():
     system_message = "You are a helpful AI that generates privacy policies. The company's name is {}, their website is {}, and they perform the following data processing activities: {}.".format(company_name, website_url, ', '.join(data_processing_activities))
 
     # Generate the policy using OpenAI's model
-    completion = client.chat.completions.create(
-        model="gpt-3.5-turbo",
-        messages=[
-            {"role": "system", "content": system_message},
-            {"role": "user", "content": "Generate a privacy policy"}
-        ]
+    completion = openai.Completion.create(
+        engine="text-davinci-002",
+        prompt=system_message,
+        temperature=0.5,
+        max_tokens=1000
     )
 
-    policy = completion.choices[0].message.content
+    policy = completion.choices[0].text.strip()
 
     return jsonify({"policy": policy})
 
