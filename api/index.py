@@ -69,6 +69,24 @@ def policy():
     return jsonify({"policy": policy})
 
 
+@app.route('/gdpr-assistant', methods=['POST'])
+def gdpr_assistant():
+    data = request.get_json()
+    user_message = data.get('message')
+
+    completion = client.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "system", "content": "You are a GDPR assistant, skilled in providing information about GDPR compliance."},
+            {"role": "user", "content": user_message}
+        ]
+    )
+
+    response = completion.choices[0].message.content
+
+    return jsonify({"response": response})
+
+
 @app.route('/')
 def index():
   return "Hello, if you're not Lance, you're prolly lost"
