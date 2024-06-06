@@ -45,6 +45,29 @@ def gregorian_sarcasm():
 
     return jsonify({"response": response})
 
+@app.route('/policy', methods=['POST'])
+def policy():
+    data = request.get_json()
+    company_name = data.get('companyName')
+    website_url = data.get('websiteUrl')
+    data_processing_activities = data.get('dataProcessingActivities')
+
+    # Prepare the system message
+    system_message = "You are a helpful AI that generates privacy policies. The company's name is {}, their website is {}, and they perform the following data processing activities: {}.".format(company_name, website_url, ', '.join(data_processing_activities))
+
+    # Generate the policy using OpenAI's model
+    completion = client.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "system", "content": system_message},
+            {"role": "user", "content": "Generate a privacy policy"}
+        ]
+    )
+
+    policy = completion.choices[0].message.content
+
+    return jsonify({"policy": policy})
+
 
 @app.route('/')
 def index():
