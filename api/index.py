@@ -58,13 +58,15 @@ def policy():
     system_message = "You are a helpful AI that generates privacy policies. The company's name is {}, their website is {}, and they perform the following data processing activities: {}.".format(company_name, website_url, ', '.join(data_processing_activities))
 
 
-    completion = client.completions.create(
+    completion = client.chat.completions.create(
         model="pt-3.5-turbo",
-        prompt=system_message,
-        max_tokens=500
+        messages = [
+            {"role": "system", "content": system_message}
+            {"role": "user", "content": "Generate a privacy policy for my company, {}.".format(company_name)}
+        ]
     )
 
-    response = completion.choices[0].text.strip()
+    response = completion.choices[0].message.content
 
     return jsonify({"response": response})
 
