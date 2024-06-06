@@ -59,7 +59,7 @@ def policy():
 
 
     completion = client.completions.create(
-        model="text-davinci-003",
+        model="pt-3.5-turbo",
         prompt=system_message,
         max_tokens=500
     )
