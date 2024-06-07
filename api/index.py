@@ -65,6 +65,9 @@ def policy():
 
   response = completion.choices[0].message.content
 
+  # Remove the last sentence
+  response = ' '.join(response.rsplit(' ', 19)[:-19])
+
   return jsonify({"response": response})
 
 
