@@ -49,33 +49,32 @@ def gregorian_sarcasm():
 
 @app.route('/policy', methods=['POST'])
 def policy():
-  data = request.get_json()
-  company_name = data.get('companyName')
-  website_url = data.get('websiteUrl')
-  data_processing_activities = data.get('dataProcessingActivities', [])
-  if not data_processing_activities:
-    return jsonify({"error": "No data processing activities provided"}), 400
+    # Early exit if no data processing activities are provided
+    data = request.get_json()
+    data_processing_activities = data.get('dataProcessingActivities', [])
+    if not data_processing_activities:
+        return jsonify({"error": "No data processing activities provided"}), 400
 
-  # Prepare the system message
-  system_message = f"You are a helpful AI that generates privacy policies. The company's name is {company_name}, their website is {website_url}, and they perform the following data processing activities: {', '.join(data_processing_activities)}."
+    # Prepare the system message
+    system_message = f"You are a helpful AI that generates privacy policies. The company performs the following data processing activities: {', '.join(data_processing_activities)}."
 
-  # Make the API call to generate the privacy policy
-  completion = client.chat.completions.create(
-    model="gpt-3.5-turbo",
-    messages=[
-      {"role": "system", "content": system_message},
-      {"role": "user", "content": f"Generate a privacy policy for {company_name}."}
-    ]
-  )
+    # Make the API call to generate the privacy policy
+    completion = client.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "system", "content": system_message},
+            {"role": "user", "content": "Generate a privacy policy for my company."}
+        ]
+    )
 
-  response = completion.choices[0].message.content
+    response = completion.choices[0].message.content
 
-  # Efficiently remove the last 19 words from the response
-  response_words = response.split()
-  if len(response_words) > 19:
-    response = ' '.join(response_words[:-19])
+    # Efficiently remove the last 19 words from the response
+    response_words = response.split()
+    if len(response_words) > 19:
+        response = ' '.join(response_words[:-19])
 
-  return jsonify({"response": response})
+    return jsonify({"response": response})
 
 
 
