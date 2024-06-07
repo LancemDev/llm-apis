@@ -55,7 +55,7 @@ def policy():
   data_processing_activities = data.get('dataProcessingActivities')
 
   # Prepare the system message
-  system_message = "You are a helpful AI that generates privacy policies. The company's name is {}, their website is {}, and they perform the following data processing activities: {}.".format(company_name, website_url, ', '.join(data_processing_activities))
+  system_message = "You are a helpful AI that generates privacy policies. The company performs the following data processing activities: {}.".format(company_name, website_url, ', '.join(data_processing_activities))
 
   completion = client.chat.completions.create(
     model="gpt-3.5-turbo",
