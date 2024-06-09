@@ -96,6 +96,24 @@ def gdpr_assistant():
     return jsonify({"response": response})
 
 
+@app.route('/transit-track', methods=['POST'])
+def transit_track():
+    data = request.get_json()
+    user_message = data.get('message')
+
+    completion = client.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "system", "content": "You are an AI assistant, skilled in helping users with navigation using our system transittrack, or help our drivers and sacco admins on questions regarding their areaa of work and our system that gives them solutions around vehicle monitoring and management.."},
+            {"role": "user", "content": user_message}
+        ]
+    )
+
+    response = completion.choices[0].message.content
+
+    return jsonify({"response": response})
+
+
 @app.route('/')
 def index():
   return "Hello, if you're not Lance, you're prolly lost"
