@@ -66,6 +66,7 @@ def policy():
             {"role": "user", "content": "Generate a privacy policy for my company."}
         ]
     )
+    
 
     response = completion.choices[0].message.content
 
