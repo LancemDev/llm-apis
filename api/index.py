@@ -1,8 +1,10 @@
-from flask import Flask, request, jsonify, render_template, redirect, make_response
+from flask import Flask, request, jsonify, render_template, redirect, make_response, send_file
 from flask_cors import CORS
-from openai import OpenAI
+from openai import OpenAI, GPT4
 import openai
 import os
+from werkzeug.utils import secure_filename
+import pandas as pd
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -118,6 +120,35 @@ def transit_track():
 @app.route('/')
 def index():
   return "Hello, if you're not Lance, you're prolly lost"
+
+@app.route('/filter', methods=['POST'])
+def filter():
+  if 'pdf' not in request.files:
+    return 'No file part'
+  file = request.files['pdf']
+  if file.filename == '':
+    return 'No selected file'
+  if file and allowed_file(file.filename):
+    filename = secure_filename(file.filename)
+    file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+    tables = extract_tables(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+    csv_file = os.path.join(app.config['UPLOAD_FOLDER'], filename.rsplit('.', 1)[0] + '.csv')
+    tables.to_csv(csv_file, index=False)
+    return send_file(csv_file, as_attachment=True)
+
+def allowed_file(filename):
+  return '.' in filename and filename.rsplit('.', 1)[1].lower() == 'pdf'
+
+def extract_tables(pdf_file):
+  # Use GPT-4 to extract tables from the PDF file
+  # This is a placeholder and may not work as expected because GPT-4 doesn't directly support PDF table extraction
+  with open(pdf_file, 'rb') as file:
+    content = file.read()
+  response = openai.complete_prompt(content, model=GPT4)
+  tables = pd.DataFrame(response.choices[0].text.strip().split('\n'))
+  return tables
+
+
 
 @app.route('/maps')
 def maps():
