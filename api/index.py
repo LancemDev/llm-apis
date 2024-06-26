@@ -78,6 +78,24 @@ def policy():
     return jsonify({"response": response})
 
 
+@app.route('/fitness', methods=['POST'])
+def fitness():
+    data = request.get_json()
+    user_message = data.get('message')
+
+    completion = client.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "system", "content": "You are a fitness assistant, skilled in providing workout routines and nutrition advice."},
+            {"role": "user", "content": user_message}
+        ]
+    )
+
+    response = completion.choices[0].message.content
+
+    return jsonify({"response": response})
+
+
 
 @app.route('/gdpr-assistant', methods=['POST'])
 def gdpr_assistant():
