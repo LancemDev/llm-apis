@@ -133,7 +133,7 @@ def agrik_chat():
     return jsonify({"response": response})
 
 
-@app.route('mental-health', methods=['POST'])
+@app.route('/mental-health', methods=['POST'])
 def mental_health():
     data = request.get_json()
     user_message = data.get('message')
