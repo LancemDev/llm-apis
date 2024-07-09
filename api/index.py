@@ -133,6 +133,24 @@ def agrik_chat():
     return jsonify({"response": response})
 
 
+@app.route('mental-health', methods=['POST'])
+def mental_health():
+    data = request.get_json()
+    user_message = data.get('message')
+
+    completion = client.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "system", "content": "You are an AI assistant, skilled in providing mental health support and resources."},
+            {"role": "user", "content": user_message}
+        ]
+    )
+
+    response = completion.choices[0].message.content
+
+    return jsonify({"response": response})
+
+
 @app.route('/transit-track', methods=['POST'])
 def transit_track():
     data = request.get_json()
