@@ -16,12 +16,11 @@
         var map;
         var marker;
         var loading = document.getElementById('loading');
-        var trail = [];  // Array to store the trail points
-
+    
         function getLocation() {
             // Show the loading spinner
             loading.style.display = 'block';
-
+    
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function(position) {
                     var pos = {
@@ -29,7 +28,7 @@
                         lng: position.coords.longitude
                     };
                     console.log(pos);
-
+    
                     // Initialize the map if it's not already initialized
                     if (!map) {
                         map = L.map('map').setView([pos.lat, pos.lng], 13);
@@ -40,27 +39,21 @@
                         // Update the map center without changing the zoom level
                         map.panTo([pos.lat, pos.lng]);
                     }
-
+    
                     // Remove the old marker if it exists
                     if (marker) {
                         map.removeLayer(marker);
                     }
-
+    
                     // Add a new marker at the current location
                     marker = L.marker([pos.lat, pos.lng]).addTo(map);
-
-                    // Add the current location to the trail
-                    trail.push([pos.lat, pos.lng]);
-
-                    // Draw the trail on the map
-                    L.polyline(trail, {color: 'red'}).addTo(map);
                 });
             }
         }
-
+    
         // Call getLocation immediately
         getLocation();
-
+    
         // Then call getLocation every 5 seconds
         setInterval(getLocation, 5000);
     </script>
