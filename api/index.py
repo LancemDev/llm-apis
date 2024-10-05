@@ -186,6 +186,25 @@ def transit_track():
     return jsonify({"response": response})
 
 
+@app.route('/agri-guard', methods=['POST'])
+def agriguard():
+    data = request.get_json()
+    tags = data.get('tags')
+    message_content = data.get('message_content')
+
+    completion = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "system", "content": "You are an AI assistant, skilled in helping users with agricultural advice and insights. You provide solutions related to crop management, pest control, soil health, and other farming practices."},
+            {"role": "user", "content": message_content}
+        ]
+    )
+
+    response = completion.choices[0].message['content']
+    heading = "Response to your agricultural query"
+
+    return jsonify({"message_response": response, "heading": heading})
+
 @app.route('/')
 def index():
   return "Hello, if you're not Lance, you're prolly lost"
