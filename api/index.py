@@ -192,7 +192,7 @@ def agriguard():
     tags = data.get('tags')
     message_content = data.get('message_content')
 
-    completion = openai.ChatCompletion.create(
+    completion = openai.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system", "content": "You are an AI assistant, skilled in helping users with agricultural advice and insights. You provide solutions related to crop management, pest control, soil health, and other farming practices."},
