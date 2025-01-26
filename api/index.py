@@ -9,19 +9,24 @@ load_dotenv()
 
 app = Flask(__name__)
 CORS(app)
-client = OpenAI(api_key=os.getenv('api_key'))
+
+openai.api_key = os.getenv('api_key')
 
 @app.route('/message', methods=['POST'])
 def get_message():
   data = request.get_json()
   user_message = data.get('message')
 
-  completion = client.chat.completions.create(
+  completion = openai.Completion.create(
     model="gpt-3.5-turbo",
     messages=[
       {"role": "system", "content": "You are an AI assistant, skilled in recommending videos and providing relevant information about them."},
       {"role": "user", "content": user_message}
-    ]
+    ],
+    max_tokens=150,
+    temperature=0.7,
+    top_p=1,
+    timeout=10
   )
 
   # Modify the response handling to provide video recommendations and relevant information
@@ -34,12 +39,16 @@ def gregorian_sarcasm():
     data = request.get_json()
     user_message = data.get('message')
 
-    completion = client.chat.completions.create(
+    completion = openai.Completion.create(
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system", "content": "You are an AI assistant, skilled in rewriting, NOT REPLYING, the text in a modern, gen-z, witty, and whimsical manner."},
             {"role": "user", "content": user_message}
-        ]
+        ],
+        max_tokens=150,
+        temperature=0.7,
+        top_p=1,
+        timeout=10
     )
 
     response = completion.choices[0].message.content
@@ -59,12 +68,16 @@ def policy():
     system_message = f"You are a helpful AI that generates privacy policies. The company performs the following data processing activities: {', '.join(data_processing_activities)}."
 
     # Make the API call to generate the privacy policy
-    completion = client.chat.completions.create(
+    completion = openai.Completion.create(
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system", "content": system_message},
             {"role": "user", "content": "Generate a privacy policy for my company."}
-        ]
+        ],    
+        max_tokens=150,
+        temperature=0.7,
+        top_p=1,
+        timeout=10
     )
     
 
@@ -83,12 +96,16 @@ def fitness():
     data = request.get_json()
     user_message = data.get('message')
 
-    completion = client.chat.completions.create(
+    completion = openai.Completion.create(
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system", "content": "You are a fitness assistant, skilled in providing workout routines and nutrition advice."},
             {"role": "user", "content": user_message}
-        ]
+        ],
+        max_tokens=150,
+        temperature=0.7,
+        top_p=1,
+        timeout=10
     )
 
     response = completion.choices[0].message.content
@@ -102,7 +119,7 @@ def gdpr_assistant():
     data = request.get_json()
     user_message = data.get('message')
 
-    completion = client.chat.completions.create(
+    completion = openai.Completion.create(
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system", "content": "You are a GDPR assistant, skilled in providing information about GDPR compliance."},
@@ -120,12 +137,16 @@ def agrik_chat():
     data = request.get_json()
     user_message = data.get('message')
 
-    completion = client.chat.completions.create(
+    completion = openai.Completion.create(
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system", "content": "You are an AI assistant, skilled in providing information about agriculture and farming."},
             {"role": "user", "content": user_message}
-        ]
+        ],
+        max_tokens=150,
+        temperature=0.7,
+        top_p=1,
+        timeout=10
     )
 
     response = completion.choices[0].message.content
@@ -137,7 +158,7 @@ def kindy_care_chat():
     data = request.get_json()
     user_message = data.get('message')
 
-    completion = client.chat.completions.create(
+    completion = openai.Completion.create(
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system", "content": "You are an AI assistant, skilled in providing information about childcare and early childhood education."},
@@ -155,46 +176,10 @@ def mental_health():
     data = request.get_json()
     user_message = data.get('message')
 
-    completion = client.chat.completions.create(
+    completion = openai.Completion.create(
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system", "content": "You are an AI assistant, skilled in providing mental health support and resources."},
-            {"role": "user", "content": user_message}
-        ]
-    )
-
-    response = completion.choices[0].message.content
-
-    return jsonify({"response": response})
-
-
-@app.route('/transit-track', methods=['POST'])
-def transit_track():
-    data = request.get_json()
-    user_message = data.get('message')
-
-    completion = client.chat.completions.create(
-        model="gpt-3.5-turbo",
-        messages=[
-            {"role": "system", "content": "You are an AI assistant, skilled in helping users with navigation using our system transittrack, or help our drivers and sacco admins on questions regarding their areaa of work and our system that gives them solutions around vehicle monitoring and management.."},
-            {"role": "user", "content": user_message}
-        ]
-    )
-
-    response = completion.choices[0].message.content
-
-    return jsonify({"response": response})
-
-
-@app.route('/agri-guard', methods=['POST'])
-def agri_guard():
-    data = request.get_json()
-    user_message = data.get('message')
-
-    completion = client.chat.completions.create(
-        model="gpt-3.5-turbo",
-        messages=[
-            {"role": "system", "content": "You are an AI assistant, skilled in helping users with agricultural advice and insights. You provide solutions related to crop management, pest control, soil health, and other farming practices."},
             {"role": "user", "content": user_message}
         ]
     )
