@@ -8,9 +8,8 @@ load_dotenv()
 
 app = Flask(__name__)
 CORS(app)
-OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
 
-client = OpenAI(api_key=OPENAI_API_KEY)
+client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
 
 @app.route('/message', methods=['POST'])
 def get_message():
